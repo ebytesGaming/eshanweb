@@ -1,778 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eshan — Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Eshan — Bot Dev</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --bg: #fff; --fg: #080808; --muted: #999; --border: #e8e8e8; --card: #f9f9f9; --chrome: 18px;
-  }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Space Grotesk', sans-serif;
-    background: #111; color: var(--fg);
-    overflow-x: hidden; padding: var(--chrome); min-height: 100vh;
-  }
-  #app {
-    background: #fff; border-radius: 16px; overflow: hidden;
-    min-height: calc(100vh - 36px); position: relative;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 30px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.4);
-  }
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 99px; }
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--black:#0a0a0a;--white:#fff;--gray:#f5f5f5;--mid:#e8e8e8;--muted:#999;--text:#111;}
+html{scroll-behavior:smooth;}
+body{font-family:'Poppins',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3.5rem;position:sticky;top:0;z-index:100;background:#ffffffee;backdrop-filter:blur(16px);border-bottom:1px solid #ebebeb;}
+.logo{font-weight:700;font-size:1rem;letter-spacing:-.3px;color:var(--black);}
+.nav-links{display:flex;gap:2.2rem;}
+.nav-links a{font-size:.8rem;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--black);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.btn-login{font-size:.8rem;font-weight:500;color:var(--muted);background:none;border:none;cursor:pointer;padding:.5rem;}
+.btn-cta{background:var(--black);color:var(--white);border:none;padding:.6rem 1.4rem;border-radius:100px;font-family:'Poppins',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:opacity .2s;}
+.btn-cta:hover{opacity:.8;}
+.hero{padding:7rem 3.5rem 5rem;max-width:1200px;margin:0 auto;}
+.hero-label{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;}
+.hero-label span{width:20px;height:1px;background:var(--muted);display:inline-block;}
+h1{font-size:clamp(3.5rem,7vw,6.5rem);font-weight:800;line-height:1;letter-spacing:-3px;margin-bottom:2rem;color:var(--black);}
+h1 em{font-style:italic;font-weight:300;color:var(--muted);}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.hero-desc{font-size:1rem;color:var(--muted);line-height:1.75;max-width:380px;font-weight:400;}
+.hero-desc strong{color:var(--black);font-weight:600;}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;}
+.btn-dark{background:var(--black);color:var(--white);border:none;padding:.8rem 2rem;border-radius:100px;font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .2s;}
+.btn-dark:hover{opacity:.75;}
+.btn-light{background:transparent;color:var(--black);border:1.5px solid #ddd;padding:.8rem 2rem;border-radius:100px;font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-light:hover{border-color:#aaa;}
+.stats{border-top:1px solid #ebebeb;border-bottom:1px solid #ebebeb;padding:3.5rem;display:grid;grid-template-columns:repeat(4,1fr);max-width:1200px;margin:0 auto;}
+.stat-item{padding:0 2rem;border-right:1px solid #ebebeb;}
+.stat-item:first-child{padding-left:0;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-2px;color:var(--black);}
+.stat-lbl{font-size:.78rem;color:var(--muted);font-weight:400;margin-top:.2rem;}
+.section{padding:6rem 3.5rem;max-width:1200px;margin:0 auto;}
+.s-eyebrow{font-size:.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
+.s-heading{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-1.5px;color:var(--black);margin-bottom:.7rem;line-height:1.1;}
+.s-heading em{font-style:italic;font-weight:300;color:var(--muted);}
+.s-sub{font-size:.9rem;color:var(--muted);line-height:1.75;max-width:420px;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.6rem;margin-top:3rem;}
+.skill{background:var(--gray);border-radius:14px;padding:1.6rem 1.4rem;transition:all .25s;cursor:default;}
+.skill:hover{background:#111;color:#fff;}
+.skill:hover .sk-sub{color:#666;}
+.sk-ico{font-size:1.5rem;margin-bottom:.8rem;}
+.sk-name{font-size:.85rem;font-weight:700;}
+.sk-sub{font-size:.7rem;color:var(--muted);margin-top:.25rem;font-weight:400;}
 
-  /* REVEAL */
-  .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
-  .reveal.visible { opacity: 1; transform: none; }
-  .reveal-delay-1 { transition-delay: .09s; }
-  .reveal-delay-2 { transition-delay: .18s; }
-  .reveal-delay-3 { transition-delay: .27s; }
+/* PROJECT CARDS */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-top:3rem;}
+.proj-card{border:1.5px solid #ebebeb;border-radius:20px;overflow:hidden;transition:all .25s;}
+.proj-card:hover{border-color:#ccc;transform:translateY(-3px);}
+.proj-card.featured{background:var(--black);color:var(--white);border-color:var(--black);}
+.proj-img{width:100%;height:180px;object-fit:cover;display:block;background:#f0f0f0;}
+.proj-img-placeholder{width:100%;height:180px;background:#f5f5f5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;cursor:pointer;transition:background .2s;border-bottom:1px solid #ebebeb;}
+.proj-img-placeholder:hover{background:#eee;}
+.proj-img-placeholder span{font-size:.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#bbb;}
+.proj-card.featured .proj-img-placeholder{background:#161616;border-bottom:1px solid #1e1e1e;}
+.proj-card.featured .proj-img-placeholder span{color:#333;}
+.proj-body{padding:1.8rem;}
+.proj-num{font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:1px;margin-bottom:1rem;}
+.proj-card.featured .proj-num{color:#444;}
+.proj-card.featured .p-desc{color:#666;}
+.proj-card.featured .p-tag{background:#1e1e1e;color:#555;border-color:#2a2a2a;}
+.p-name{font-size:1.2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.6rem;}
+.p-desc{font-size:.83rem;color:var(--muted);line-height:1.75;margin-bottom:1.4rem;}
+.p-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.p-tag{font-size:.65rem;font-weight:600;letter-spacing:.3px;background:var(--gray);color:var(--muted);border:1px solid var(--mid);padding:.3rem .8rem;border-radius:100px;}
 
-  /* NAV */
-  nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 3rem; border-bottom: 1px solid var(--border);
-    position: sticky; top: 0; background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(16px); z-index: 100;
-  }
-  .logo {
-    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem;
-    letter-spacing: -1px; cursor: pointer; user-select: none;
-    transition: opacity .2s;
-  }
-  .logo:hover { opacity: .6; }
-  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
-  .nav-links a { text-decoration: none; color: var(--muted); font-size: .85rem; font-weight: 500; transition: color .2s; }
-  .nav-links a:hover { color: var(--fg); }
+/* IMAGE UPLOAD */
+.img-upload-input{display:none;}
 
-  /* HERO */
-  .hero { padding: 7rem 3.5rem 5rem; position: relative; overflow: hidden; }
-  .hero-bg-text {
-    position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
-    font-family: 'Syne', sans-serif; font-size: clamp(8rem,18vw,16rem);
-    font-weight: 800; color: #f0f0f0; letter-spacing: -8px;
-    user-select: none; pointer-events: none; white-space: nowrap;
-  }
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace; font-size: .72rem; color: var(--muted);
-    letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 1.5rem;
-    display: flex; align-items: center; gap: .7rem;
-  }
-  .hero-eyebrow::before { content:''; display:inline-block; width:28px; height:1px; background:var(--muted); }
-  .hero h1 {
-    font-family: 'Syne', sans-serif; font-size: clamp(3.5rem,9vw,7.5rem);
-    font-weight: 800; letter-spacing: -4px; line-height: .95;
-    margin-bottom: 2rem; position: relative; z-index: 1;
-  }
-  .hero h1 em { font-style: normal; color: var(--muted); }
-  .hero-sub { font-size: 1rem; color: var(--muted); max-width: 420px; line-height: 1.75; margin-bottom: 2.5rem; font-family: 'Inter', sans-serif; position: relative; z-index: 1; }
-  .hero-btns { display: flex; gap: .8rem; position: relative; z-index: 1; }
-  .btn { display:inline-block; padding:.7rem 1.5rem; border-radius:8px; font-size:.85rem; font-weight:600; text-decoration:none; cursor:pointer; border:none; transition:opacity .2s,transform .18s; font-family:'Space Grotesk',sans-serif; }
-  .btn:hover { opacity:.75; transform:translateY(-2px); }
-  .btn-dark { background:var(--fg); color:#fff; }
-  .btn-outline { background:transparent; color:var(--fg); border:1.5px solid #ddd; }
-
-  /* STATS */
-  .stats-row { display:flex; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-  .stat { flex:1; padding:1.6rem 3.5rem; border-right:1px solid var(--border); }
-  .stat:last-child { border-right:none; }
-  .stat-num { font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; letter-spacing:-1.5px; line-height:1; margin-bottom:.3rem; }
-  .stat-label { font-family:'DM Mono',monospace; font-size:.68rem; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; }
-
-  /* MARQUEE */
-  .marquee-wrap { overflow:hidden; padding:1rem 0; background:var(--fg); }
-  .marquee-track { display:flex; animation:marquee 20s linear infinite; width:max-content; }
-  .marquee-item { font-family:'Syne',sans-serif; font-size:.75rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:#fff; padding:0 2.5rem; white-space:nowrap; opacity:.6; }
-  .marquee-sep { opacity:.2 !important; }
-  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-  /* SECTIONS */
-  .section-wrap { padding:5rem 3.5rem; }
-  .divider { height:1px; background:var(--border); }
-  .section-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:3rem; }
-  .section-title { font-family:'Syne',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; letter-spacing:-1.5px; }
-  .section-num { font-family:'DM Mono',monospace; font-size:.72rem; color:var(--muted); letter-spacing:1px; }
-
-  /* ABOUT */
-  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
-  .about-left h2 { font-family:'Syne',sans-serif; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:800; letter-spacing:-1.5px; line-height:1.05; margin-bottom:1.5rem; }
-  .about-right p { font-family:'Inter',sans-serif; font-size:.96rem; color:#444; line-height:1.9; margin-bottom:1rem; }
-  .tag-row { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.5rem; }
-  .tag { font-family:'DM Mono',monospace; font-size:.7rem; padding:.3rem .75rem; border:1px solid var(--border); border-radius:99px; color:var(--muted); }
-
-  /* PROJECTS */
-  .projects-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.2rem; }
-  .project-card {
-    border:1px solid var(--border); border-radius:14px; padding:1.8rem;
-    background:var(--card); display:flex; flex-direction:column; gap:.75rem;
-    transition:border-color .22s,transform .22s,box-shadow .22s;
-    position:relative; overflow:hidden; text-decoration:none; color:inherit; cursor:pointer;
-  }
-  .project-card:hover { border-color:#bbb; transform:translateY(-5px); box-shadow:0 16px 40px rgba(0,0,0,.07); }
-  .project-icon { font-size:1.2rem; margin-bottom:.2rem; }
-  .project-card h3 { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; letter-spacing:-.3px; }
-  .project-role { font-family:'DM Mono',monospace; font-size:.65rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; }
-  .project-card p { font-family:'Inter',sans-serif; font-size:.82rem; color:var(--muted); line-height:1.7; flex:1; }
-  .project-stats { display:flex; gap:1rem; margin-top:.3rem; }
-  .pstat { font-family:'DM Mono',monospace; font-size:.68rem; color:#888; }
-  .pstat strong { font-family:'Syne',sans-serif; font-size:.85rem; font-weight:700; color:var(--fg); letter-spacing:-.5px; display:block; }
-  .project-foot { display:flex; justify-content:space-between; align-items:center; padding-top:.75rem; border-top:1px solid var(--border); margin-top:.3rem; }
-  .project-tag { font-family:'DM Mono',monospace; font-size:.67rem; color:var(--muted); }
-  .project-arrow { color:var(--muted); font-size:.85rem; transition:transform .2s; }
-  .project-card:hover .project-arrow { transform:translate(3px,-3px); }
-
-  /* ORDER BADGE */
-  .order-badge {
-    position:absolute; top:1rem; right:1rem;
-    font-family:'DM Mono',monospace; font-size:.6rem; letter-spacing:1px; text-transform:uppercase;
-    padding:.2rem .55rem; border-radius:99px; border:1px solid var(--border);
-    color:var(--muted); background:#fff;
-  }
-  .project-card.open-status .order-badge { color:#2d7a3a; border-color:#b5debb; background:#f0faf2; }
-  .project-card.closed-status .order-badge { color:#888; border-color:#ddd; background:#f7f7f7; }
-
-  /* STATUS */
-  .status-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.2rem; }
-  .status-card { border:1px solid var(--border); border-radius:14px; padding:1.6rem 1.8rem; background:var(--card); display:flex; flex-direction:column; gap:.9rem; }
-  .status-top { display:flex; justify-content:space-between; align-items:flex-start; }
-  .status-name { font-family:'Syne',sans-serif; font-weight:700; font-size:.95rem; }
-  .status-badge { display:flex; align-items:center; gap:.4rem; font-family:'DM Mono',monospace; font-size:.67rem; color:var(--muted); letter-spacing:.5px; text-transform:uppercase; }
-  .dot { width:6px; height:6px; border-radius:50%; background:#ccc; transition:background .3s; }
-  .dot.open { background:#3cb05a; }
-  .status-badge.open { color:#2d7a3a; }
-  .status-desc { font-family:'Inter',sans-serif; font-size:.8rem; color:var(--muted); line-height:1.65; }
-
-  /* CONTACT */
-  .contact-grid { display:grid; grid-template-columns:1fr 1.4fr; gap:5rem; align-items:start; }
-  .contact-left h2 { font-family:'Syne',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-2px; line-height:1; margin-bottom:1rem; }
-  .contact-left p { font-family:'Inter',sans-serif; font-size:.9rem; color:var(--muted); line-height:1.75; }
-  .contact-links { display:flex; flex-direction:column; gap:.75rem; }
-  .contact-link { display:flex; align-items:center; gap:1rem; padding:1.1rem 1.4rem; background:var(--card); border:1px solid var(--border); border-radius:12px; text-decoration:none; color:var(--fg); transition:border-color .2s,transform .18s,box-shadow .2s; }
-  .contact-link:hover { border-color:#bbb; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.05); }
-  .contact-icon { width:36px; height:36px; background:#efefef; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
-  .contact-text-main { font-size:.9rem; font-weight:600; }
-  .contact-text-sub { font-family:'Inter',sans-serif; font-size:.76rem; color:var(--muted); }
-  .contact-arrow { margin-left:auto; color:var(--muted); }
-
-  /* FOOTER */
-  .footer { border-top:1px solid var(--border); padding:1.8rem 3.5rem; display:flex; justify-content:space-between; align-items:center; }
-  .footer span { font-family:'DM Mono',monospace; font-size:.7rem; color:var(--muted); }
-
-  /* ===== ADMIN PANEL ===== */
-  #admin-overlay {
-    display:none; position:fixed; inset:0; z-index:999;
-    background:rgba(0,0,0,.45); align-items:center; justify-content:center;
-  }
-  #admin-overlay.open { display:flex; }
-  #admin-panel {
-    background:#fff; border-radius:16px; padding:2rem; width:380px; max-width:calc(100vw - 36px);
-    box-shadow:0 24px 60px rgba(0,0,0,.25); position:relative;
-  }
-  #admin-panel h2 { font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; letter-spacing:-1px; margin-bottom:.3rem; }
-  #admin-panel .admin-sub { font-family:'DM Mono',monospace; font-size:.65rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-bottom:1.8rem; }
-  .admin-row { display:flex; align-items:center; justify-content:space-between; padding:1rem 0; border-bottom:1px solid var(--border); }
-  .admin-row:last-of-type { border-bottom:none; }
-  .admin-label { font-size:.9rem; font-weight:600; }
-  .admin-desc { font-family:'Inter',sans-serif; font-size:.75rem; color:var(--muted); margin-top:.15rem; }
-  /* Toggle */
-  .toggle { position:relative; width:44px; height:24px; flex-shrink:0; }
-  .toggle input { opacity:0; width:0; height:0; }
-  .toggle-track {
-    position:absolute; inset:0; border-radius:99px; background:#ddd;
-    cursor:pointer; transition:background .25s;
-  }
-  .toggle input:checked + .toggle-track { background:#080808; }
-  .toggle-thumb {
-    position:absolute; top:3px; left:3px; width:18px; height:18px;
-    background:#fff; border-radius:50%; pointer-events:none;
-    transition:transform .25s; box-shadow:0 1px 3px rgba(0,0,0,.2);
-  }
-  .toggle input:checked ~ .toggle-thumb { transform:translateX(20px); }
-  .admin-save {
-    margin-top:1.5rem; width:100%; padding:.8rem; background:var(--fg); color:#fff;
-    border:none; border-radius:10px; font-family:'Space Grotesk',sans-serif;
-    font-size:.9rem; font-weight:600; cursor:pointer; transition:opacity .2s;
-  }
-  .admin-save:hover { opacity:.8; }
-  .admin-close {
-    position:absolute; top:1.2rem; right:1.2rem; background:none; border:none;
-    font-size:1.2rem; cursor:pointer; color:var(--muted); transition:color .2s;
-  }
-  .admin-close:hover { color:var(--fg); }
-  #admin-pw-screen { display:flex; flex-direction:column; gap:1rem; }
-  #admin-pw-screen input {
-    width:100%; padding:.75rem 1rem; border:1px solid var(--border); border-radius:10px;
-    font-family:'Space Grotesk',sans-serif; font-size:.95rem; outline:none;
-  }
-  #admin-pw-screen input:focus { border-color:#888; }
-  #admin-pw-screen button {
-    padding:.75rem; background:var(--fg); color:#fff; border:none; border-radius:10px;
-    font-family:'Space Grotesk',sans-serif; font-weight:600; cursor:pointer; transition:opacity .2s;
-  }
-  #admin-pw-screen button:hover { opacity:.8; }
-  .pw-error { font-family:'Inter',sans-serif; font-size:.8rem; color:#c0392b; display:none; }
-  .admin-saving { font-family:'DM Mono',monospace; font-size:.7rem; color:var(--muted); text-align:center; margin-top:.75rem; display:none; }
-
-  /* ===== ORDER MODAL ===== */
-  #order-overlay {
-    display:none; position:fixed; inset:0; z-index:998;
-    background:rgba(0,0,0,.45); align-items:center; justify-content:center;
-  }
-  #order-overlay.open { display:flex; }
-  #order-modal {
-    background:#fff; border-radius:16px; padding:2rem; width:460px; max-width:calc(100vw - 36px);
-    box-shadow:0 24px 60px rgba(0,0,0,.25); position:relative; max-height:90vh; overflow-y:auto;
-  }
-  #order-modal h2 { font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; letter-spacing:-1px; margin-bottom:.3rem; }
-  #order-modal .order-modal-sub { font-family:'DM Mono',monospace; font-size:.65rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-bottom:1.5rem; }
-  .form-group { margin-bottom:1rem; }
-  .form-group label { display:block; font-family:'DM Mono',monospace; font-size:.67rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-bottom:.4rem; }
-  .form-group input, .form-group textarea, .form-group select {
-    width:100%; padding:.75rem 1rem; border:1px solid var(--border); border-radius:10px;
-    font-family:'Inter',sans-serif; font-size:.9rem; outline:none; resize:vertical;
-    transition:border-color .2s; background:#fff;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:#888; }
-  .form-group textarea { min-height:90px; }
-  .form-submit {
-    width:100%; padding:.85rem; background:var(--fg); color:#fff; border:none;
-    border-radius:10px; font-family:'Space Grotesk',sans-serif; font-weight:600;
-    font-size:.9rem; cursor:pointer; transition:opacity .2s; margin-top:.5rem;
-  }
-  .form-submit:hover { opacity:.8; }
-  .form-submit:disabled { opacity:.5; cursor:default; }
-  .form-note { font-family:'Inter',sans-serif; font-size:.75rem; color:var(--muted); line-height:1.6; margin-top:.75rem; }
-  .order-closed-notice {
-    background:#f7f7f7; border:1px solid var(--border); border-radius:10px;
-    padding:1.2rem; text-align:center; font-family:'Inter',sans-serif;
-    font-size:.88rem; color:var(--muted); line-height:1.6;
-  }
-  .order-success { display:none; text-align:center; padding:1rem 0; }
-  .order-success .tick { font-size:2rem; margin-bottom:.75rem; }
-  .order-success h3 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; margin-bottom:.5rem; }
-  .order-success p { font-family:'Inter',sans-serif; font-size:.85rem; color:var(--muted); }
-  .order-close {
-    position:absolute; top:1.2rem; right:1.2rem; background:none; border:none;
-    font-size:1.2rem; cursor:pointer; color:var(--muted); transition:color .2s;
-  }
-  .order-close:hover { color:var(--fg); }
-  .closed-pill {
-    display:inline-block; font-family:'DM Mono',monospace; font-size:.6rem;
-    letter-spacing:1px; text-transform:uppercase; padding:.25rem .6rem;
-    border-radius:99px; background:#f0f0f0; color:#999; margin-bottom:1rem;
-  }
+/* ABOUT */
+.about-wrap{background:var(--black);color:var(--white);padding:6rem 3.5rem;}
+.about-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:5rem;align-items:center;}
+.about-wrap .s-eyebrow{color:#555;}
+.about-wrap .s-heading{color:var(--white);}
+.about-wrap .s-heading em{color:#555;}
+.about-wrap p{font-size:.95rem;color:#666;line-height:1.85;margin-top:1.5rem;}
+.about-wrap strong{color:#aaa;font-weight:600;}
+.dc-card{background:#111;border:1px solid #1e1e1e;border-radius:20px;padding:2rem;}
+.dc-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
+.dc-av{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #222;}
+.dc-name{font-weight:700;font-size:.95rem;color:#fff;}
+.dc-handle{font-size:.75rem;color:#555;margin-top:.15rem;}
+.dc-status{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;}
+.dc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.dc-divider{border:none;border-top:1px solid #1e1e1e;margin:1.2rem 0;}
+.dc-stack{display:flex;flex-wrap:wrap;gap:.5rem;}
+.dc-tag{font-size:.68rem;font-weight:600;background:#1a1a1a;color:#555;border:1px solid #222;padding:.3rem .8rem;border-radius:100px;}
+.cta-wrap{padding:6rem 3.5rem;max-width:1200px;margin:0 auto;text-align:center;}
+.cta-wrap h2{font-size:clamp(2.5rem,6vw,5rem);font-weight:800;letter-spacing:-3px;color:var(--black);line-height:1;margin-bottom:1.5rem;}
+.cta-wrap h2 em{font-style:italic;font-weight:300;color:var(--muted);}
+.cta-wrap p{font-size:.95rem;color:var(--muted);max-width:360px;margin:0 auto 2.5rem;line-height:1.75;}
+.cta-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
+footer{border-top:1px solid #ebebeb;padding:1.6rem 3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.f-copy{font-size:.75rem;color:var(--muted);font-weight:400;}
+.f-dc{font-size:.75rem;font-weight:600;color:#5865F2;}
+@keyframes tapescroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@media(max-width:768px){
+  nav,footer{padding:1rem 1.5rem;}.nav-links{display:none;}
+  .hero,.cta-wrap{padding:4rem 1.5rem 3rem;}
+  .stats{padding:2.5rem 1.5rem;grid-template-columns:1fr 1fr;gap:2rem;}
+  .stat-item{border-right:none;padding:0;}
+  .section{padding:4rem 1.5rem;}
+  .about-wrap{padding:4rem 1.5rem;}
+  .about-inner{grid-template-columns:1fr;gap:2.5rem;}
+  h1{letter-spacing:-2px;}
+}
 </style>
 </head>
 <body>
-<div id="app">
 
-  <!-- NAV -->
-  <nav>
-    <div class="logo" id="logo-btn" title="Admin">eshan.</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#status">Status</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<nav>
+  <div class="logo">Eshan</div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#work">Past Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="btn-login">noteshan</button>
+    <button class="btn-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-bg-text">DEV</div>
-    <div class="hero-eyebrow reveal">Discord Dev &amp; Web Builder</div>
-    <h1 class="reveal reveal-delay-1">Hey,<br>I'm <em>Eshan.</em></h1>
-    <p class="hero-sub reveal reveal-delay-2">I build Discord bots with JavaScript and craft clean websites on the side. Simple things, done properly.</p>
-    <div class="hero-btns reveal reveal-delay-3">
-      <a href="#projects" class="btn btn-dark">View Projects</a>
-      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+<div style="max-width:1200px;margin:0 auto;">
+<div class="hero">
+  <div class="hero-label"><span></span> Discord Bot Developer</div>
+  <h1>Building bots<br>that <em>actually</em><br>work.</h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">I'm <strong>Eshan</strong> — I build custom Discord bots with <strong>JavaScript & Discord.js</strong>. From moderation to full automation, fast and clean.</p>
+    <div class="hero-actions">
+      <button class="btn-dark" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">View Past Work</button>
+      <button class="btn-light" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
     </div>
   </div>
+</div>
+</div>
 
-  <!-- STATS -->
-  <div class="stats-row">
-    <div class="stat reveal"><div class="stat-num">950+</div><div class="stat-label">Servers</div></div>
-    <div class="stat reveal reveal-delay-1"><div class="stat-num">50k+</div><div class="stat-label">Members Reached</div></div>
-    <div class="stat reveal reveal-delay-2"><div class="stat-num">3</div><div class="stat-label">Projects</div></div>
-    <div class="stat reveal reveal-delay-3"><div class="stat-num">2</div><div class="stat-label">Languages</div></div>
-  </div>
+<div style="border-top:1px solid #ebebeb;border-bottom:1px solid #ebebeb;">
+<div class="stats">
+  <div class="stat-item"><div class="stat-num">JS</div><div class="stat-lbl">primary language</div></div>
+  <div class="stat-item"><div class="stat-num">v14</div><div class="stat-lbl">discord.js version</div></div>
+  <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-lbl">uptime focused</div></div>
+  <div class="stat-item"><div class="stat-num">Open</div><div class="stat-lbl">for commissions</div></div>
+</div>
+</div>
 
-  <!-- MARQUEE -->
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <span class="marquee-item">Discord.js</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">JavaScript</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">TypeScript</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">Bot Development</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">Web Design</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">React</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">Node.js</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">Clean Code</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">Discord.js</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">JavaScript</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">TypeScript</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">Bot Development</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">Web Design</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">React</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">Node.js</span><span class="marquee-item marquee-sep">/</span>
-      <span class="marquee-item">Clean Code</span><span class="marquee-item marquee-sep">/</span>
-    </div>
-  </div>
-
-  <!-- ABOUT -->
-  <div class="section-wrap" id="about">
-    <div class="about-grid">
-      <div class="about-left reveal"><h2>A bit about me.</h2></div>
-      <div class="about-right reveal reveal-delay-1">
-        <p>I'm Eshan — a developer living in the Discord ecosystem. I build bots in JavaScript and TypeScript that help communities scale, automate, and run smoothly.</p>
-        <p>I've worked on bots reaching hundreds of servers and tens of thousands of members. On the side I build clean, minimal websites — HTML, React, the works.</p>
-        <div class="tag-row">
-          <span class="tag">discord.js</span><span class="tag">javascript</span>
-          <span class="tag">typescript</span><span class="tag">node.js</span>
-          <span class="tag">react</span><span class="tag">html / css</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- PROJECTS -->
-  <div class="section-wrap" id="projects">
-    <div class="section-header reveal">
-      <h2 class="section-title">Projects.</h2>
-      <span class="section-num">03 works</span>
-    </div>
-    <div class="projects-grid">
-      <div class="project-card reveal reveal-delay-1" data-project="Bot Commission" data-name="Tropica Systems">
-        <span class="order-badge" id="badge-tropica">● Closed</span>
-        <div class="project-icon">◈</div>
-        <h3>Tropica Systems</h3>
-        <div class="project-role">Junior Engineer</div>
-        <p>Multipurpose design bot for Discord — utilities, aesthetics, and tools built for communities at scale.</p>
-        <div class="project-stats">
-          <div class="pstat"><strong>800+</strong> servers</div>
-          <div class="pstat"><strong>40k+</strong> members</div>
-        </div>
-        <div class="project-foot">
-          <span class="project-tag">JS / TS</span>
-          <span class="project-arrow">↗</span>
-        </div>
-      </div>
-      <div class="project-card reveal reveal-delay-2" data-project="Bot Commission" data-name="Torch">
-        <span class="order-badge" id="badge-torch">● Closed</span>
-        <div class="project-icon">⬡</div>
-        <h3>Torch</h3>
-        <div class="project-role">Senior Developer</div>
-        <p>ER:LC management bot with API integration, shift management commands, and tooling for roleplay communities.</p>
-        <div class="project-stats">
-          <div class="pstat"><strong>150+</strong> servers</div>
-          <div class="pstat"><strong>10k+</strong> members</div>
-        </div>
-        <div class="project-foot">
-          <span class="project-tag">JS / Discord.js</span>
-          <span class="project-arrow">↗</span>
-        </div>
-      </div>
-      <div class="project-card reveal reveal-delay-3" data-project="Website Work" data-name="Anticipy">
-        <span class="order-badge" id="badge-anticipy">● Closed</span>
-        <div class="project-icon">▣</div>
-        <h3>Anticipy</h3>
-        <div class="project-role">Web Developer</div>
-        <p>Web project live at anticipy.ai and aevoy.com — built with HTML, React, and JavaScript.</p>
-        <div class="project-stats">
-          <div class="pstat"><strong>anticipy.ai</strong></div>
-          <div class="pstat"><strong>aevoy.com</strong></div>
-        </div>
-        <div class="project-foot">
-          <span class="project-tag">HTML / React / JS</span>
-          <span class="project-arrow">↗</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- STATUS -->
-  <div class="section-wrap" id="status">
-    <div class="section-header reveal">
-      <h2 class="section-title">Status.</h2>
-      <span class="section-num" id="status-summary">all closed</span>
-    </div>
-    <div class="status-grid">
-      <div class="status-card reveal reveal-delay-1">
-        <div class="status-top">
-          <span class="status-name">Bot Commissions</span>
-          <span class="status-badge" id="sbadge-bot"><span class="dot" id="sdot-bot"></span> <span id="stext-bot">Closed</span></span>
-        </div>
-        <p class="status-desc" id="sdesc-bot">Not taking on new bot projects right now. Check back later.</p>
-      </div>
-      <div class="status-card reveal reveal-delay-2">
-        <div class="status-top">
-          <span class="status-name">Website Work</span>
-          <span class="status-badge" id="sbadge-web"><span class="dot" id="sdot-web"></span> <span id="stext-web">Closed</span></span>
-        </div>
-        <p class="status-desc" id="sdesc-web">Web projects paused at the moment.</p>
-      </div>
-      <div class="status-card reveal reveal-delay-3">
-        <div class="status-top">
-          <span class="status-name">Collabs</span>
-          <span class="status-badge" id="sbadge-collab"><span class="dot" id="sdot-collab"></span> <span id="stext-collab">Closed</span></span>
-        </div>
-        <p class="status-desc" id="sdesc-collab">Not looking for partnerships or collaborations right now.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- CONTACT -->
-  <div class="section-wrap" id="contact">
-    <div class="contact-grid">
-      <div class="contact-left reveal">
-        <h2>Let's talk.</h2>
-        <p>Reach out on Discord — it's where I spend most of my time anyway.</p>
-      </div>
-      <div class="contact-links reveal reveal-delay-1">
-        <a href="https://discord.com/users/" target="_blank" class="contact-link">
-          <div class="contact-icon">◎</div>
-          <div><div class="contact-text-main">Discord</div><div class="contact-text-sub">Best way to reach me</div></div>
-          <span class="contact-arrow">↗</span>
-        </a>
-        <a href="https://github.com/" target="_blank" class="contact-link">
-          <div class="contact-icon">⬡</div>
-          <div><div class="contact-text-main">GitHub</div><div class="contact-text-sub">See what I've been building</div></div>
-          <span class="contact-arrow">↗</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <span>eshan — 2026</span>
-    <span>discord dev &amp; web builder</span>
+<div class="section" id="skills">
+  <div class="s-eyebrow">Expertise</div>
+  <div class="s-heading">What I <em>build with</em></div>
+  <p class="s-sub">The tools behind every bot I ship — clean, modern, and built to last.</p>
+  <div class="skills-grid">
+    <div class="skill"><div class="sk-ico">🟨</div><div class="sk-name">JavaScript</div><div class="sk-sub">ES2022+</div></div>
+    <div class="skill"><div class="sk-ico">🤖</div><div class="sk-name">Discord.js</div><div class="sk-sub">v14 / Slash Commands</div></div>
+    <div class="skill"><div class="sk-ico">🟢</div><div class="sk-name">Node.js</div><div class="sk-sub">Runtime & Hosting</div></div>
+    <div class="skill"><div class="sk-ico">🍃</div><div class="sk-name">MongoDB</div><div class="sk-sub">Data Persistence</div></div>
+    <div class="skill"><div class="sk-ico">🔗</div><div class="sk-name">REST APIs</div><div class="sk-sub">Integrations</div></div>
+    <div class="skill"><div class="sk-ico">⚡</div><div class="sk-name">Fast Delivery</div><div class="sk-sub">Documented Code</div></div>
   </div>
 </div>
 
-<!-- ===== ADMIN OVERLAY ===== -->
-<div id="admin-overlay">
-  <div id="admin-panel">
-    <button class="admin-close" id="admin-close-btn">✕</button>
-    <!-- PW Screen -->
-    <div id="admin-pw-screen">
-      <div>
-        <h2>Admin</h2>
-        <div class="admin-sub">eshan's control panel</div>
+<!-- POLICE TAPE -->
+<div style="overflow:hidden;line-height:0;user-select:none;">
+  <div style="background:repeating-linear-gradient(135deg,#1a1a1a 0px,#1a1a1a 20px,#2a2a2a 20px,#2a2a2a 40px);height:18px;"></div>
+  <div style="background:#d4bc6a22;padding:.5rem 0;white-space:nowrap;overflow:hidden;border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;">
+    <span style="display:inline-block;animation:tapescroll 22s linear infinite;">
+      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
+      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
+    </span>
+  </div>
+  <div style="background:repeating-linear-gradient(135deg,#1a1a1a 0px,#1a1a1a 20px,#2a2a2a 20px,#2a2a2a 40px);height:18px;"></div>
+</div>
+
+<!-- PAST WORK -->
+<div class="section" id="work">
+  <div class="s-eyebrow">Past Work</div>
+  <div class="s-heading">Selected <em>projects</em></div>
+  <p class="s-sub">Click the image area on any card to add a screenshot or preview. Have an idea? I'm open for commissions.</p>
+  <div class="proj-grid">
+
+    <div class="proj-card featured">
+      <div class="proj-img-placeholder" onclick="document.getElementById('img0').click()" title="Click to add image">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Add Image</span>
       </div>
-      <input type="password" id="pw-input" placeholder="Enter password…" />
-      <p class="pw-error" id="pw-error">Incorrect password.</p>
-      <button onclick="checkPw()">Unlock →</button>
+      <input class="img-upload-input" type="file" id="img0" accept="image/*" onchange="setImg(this,0)"/>
+      <div class="proj-body">
+        <div class="proj-num">01 — Featured</div>
+        <div class="p-name">GuardBot</div>
+        <p class="p-desc">Full-featured moderation suite with auto-mod, action logging, warn/ban/mute workflows and rich audit logs.</p>
+        <div class="p-tags"><span class="p-tag">Discord.js</span><span class="p-tag">MongoDB</span><span class="p-tag">Slash Commands</span></div>
+      </div>
     </div>
-    <!-- Controls Screen -->
-    <div id="admin-controls" style="display:none">
-      <h2>Status Control</h2>
-      <div class="admin-sub">changes apply to everyone</div>
-      <div class="admin-row">
-        <div>
-          <div class="admin-label">Bot Commissions</div>
-          <div class="admin-desc">Open for new bot projects</div>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="toggle-bot" onchange="updateToggleState()">
-          <div class="toggle-track"></div>
-          <div class="toggle-thumb"></div>
-        </label>
+
+    <div class="proj-card">
+      <div class="proj-img-placeholder" onclick="document.getElementById('img1').click()" title="Click to add image">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Add Image</span>
       </div>
-      <div class="admin-row">
-        <div>
-          <div class="admin-label">Website Work</div>
-          <div class="admin-desc">Taking on web projects</div>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="toggle-web" onchange="updateToggleState()">
-          <div class="toggle-track"></div>
-          <div class="toggle-thumb"></div>
-        </label>
+      <input class="img-upload-input" type="file" id="img1" accept="image/*" onchange="setImg(this,1)"/>
+      <div class="proj-body">
+        <div class="proj-num">02</div>
+        <div class="p-name">ServerUtils</div>
+        <p class="p-desc">Multi-purpose utility bot — giveaways, polls, reminders, custom embeds, and role management at scale.</p>
+        <div class="p-tags"><span class="p-tag">Node.js</span><span class="p-tag">SQLite</span><span class="p-tag">REST API</span></div>
       </div>
-      <div class="admin-row">
-        <div>
-          <div class="admin-label">Collabs</div>
-          <div class="admin-desc">Open for partnerships</div>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="toggle-collab" onchange="updateToggleState()">
-          <div class="toggle-track"></div>
-          <div class="toggle-thumb"></div>
-        </label>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-img-placeholder" onclick="document.getElementById('img2').click()" title="Click to add image">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Add Image</span>
       </div>
-      <button class="admin-save" id="admin-save-btn" onclick="saveStatus()">Save Changes</button>
-      <div class="admin-saving" id="admin-saving">Saving…</div>
+      <input class="img-upload-input" type="file" id="img2" accept="image/*" onchange="setImg(this,2)"/>
+      <div class="proj-body">
+        <div class="proj-num">03 — Open</div>
+        <div class="p-name">Your Bot</div>
+        <p class="p-desc">Got an idea? I build custom bots to spec — from simple commands to complex automation. Ping me.</p>
+        <div class="p-tags"><span class="p-tag">Custom Scope</span><span class="p-tag">On Request</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-wrap" id="about">
+  <div class="about-inner">
+    <div>
+      <div class="s-eyebrow">Background</div>
+      <div class="s-heading" style="color:#fff;">About <em style="color:#444;">me</em></div>
+      <p>I'm <strong>Eshan</strong> — a Discord bot developer who writes clean, production-ready <strong>JavaScript</strong> using the latest Discord.js APIs.</p>
+      <p>I care about shipping things that are reliable and fast. No bloat — just solid bots that do exactly what you need, with code you can actually read.</p>
+      <p>Find me on Discord as <strong>noteshan</strong> — always open to commissions and collabs.</p>
+    </div>
+    <div class="dc-card">
+      <div class="dc-row">
+        <img class="dc-av" src="https://images-ext-1.discordapp.net/external/9qVqbtNjX7ZIKXOFOUGMPp-uj1wgNxLY84tbtvwfiH0/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/1396979947284729856/192a0185852a8e51ba373b0efdbf7c6b.webp?format=webp&width=200&height=200" alt="Eshan"/>
+        <div>
+          <div class="dc-name">Eshan</div>
+          <div class="dc-handle">@noteshan</div>
+        </div>
+      </div>
+      <div class="dc-status" id="dc-status-row">
+        <span class="dc-dot" id="dc-dot" style="background:#747f8d;"></span>
+        <span id="dc-status-text" style="color:#747f8d;">Fetching status...</span>
+      </div>
+      <div class="dc-divider"></div>
+      <div style="font-size:.68rem;color:#444;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-bottom:.7rem;">Stack</div>
+      <div class="dc-stack">
+        <span class="dc-tag">JavaScript</span>
+        <span class="dc-tag">Discord.js v14</span>
+        <span class="dc-tag">Node.js</span>
+        <span class="dc-tag">MongoDB</span>
+        <span class="dc-tag">REST APIs</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ===== ORDER MODAL ===== -->
-<div id="order-overlay">
-  <div id="order-modal">
-    <button class="order-close" id="order-close-btn">✕</button>
-    <div id="order-form-wrap">
-      <h2 id="order-modal-title">Place an Order</h2>
-      <div class="order-modal-sub" id="order-modal-sub">tropica systems</div>
-      <div id="order-closed-block" class="order-closed-notice" style="display:none">
-        <span class="closed-pill">● Closed</span><br>
-        This service isn't taking orders right now.<br>Check back when it opens.
-      </div>
-      <div id="order-form-fields">
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" id="f-name" placeholder="e.g. Alex" />
-        </div>
-        <div class="form-group">
-          <label>Your Email</label>
-          <input type="email" id="f-email" placeholder="you@example.com" />
-        </div>
-        <div class="form-group">
-          <label>Discord Username</label>
-          <input type="text" id="f-discord" placeholder="username or user ID" />
-        </div>
-        <div class="form-group">
-          <label>Tell me what you need</label>
-          <textarea id="f-desc" placeholder="Describe your project, requirements, timeline…"></textarea>
-        </div>
-        <div class="form-group">
-          <label>Budget (optional)</label>
-          <input type="text" id="f-budget" placeholder="e.g. $30–$60" />
-        </div>
-        <button class="form-submit" id="form-submit-btn" onclick="submitOrder()">Send Request →</button>
-        <p class="form-note">Your request will be sent directly to Eshan. He'll get back to you via Discord or email.</p>
-      </div>
-    </div>
-    <div class="order-success" id="order-success">
-      <div class="tick">◎</div>
-      <h3>Request Sent!</h3>
-      <p>Eshan will review your request and get back to you shortly.</p>
-    </div>
+<!-- CTA -->
+<div class="cta-wrap" id="contact">
+  <div class="s-eyebrow" style="margin-bottom:1rem;">Let's build</div>
+  <h2>Got a<br><em>bot idea?</em></h2>
+  <p>Open for commissions and collabs. Shoot me a message on Discord.</p>
+  <div class="cta-btns">
+    <button class="btn-dark" onclick="window.open('https://discord.com/users/1396979947284729856','_blank')">Message on Discord</button>
+    <button class="btn-light">View GitHub</button>
   </div>
 </div>
+
+<footer>
+  <span class="f-copy">© 2026 Eshan. All rights reserved.</span>
+  <span class="f-dc">discord: noteshan</span>
+</footer>
 
 <script>
-  // ── CONFIG ──────────────────────────────────────────────────────
-  const ADMIN_PASSWORD = "eshan2026";          // Change this!
-  const BIN_ID = "";                            // ← paste jsonbin.io bin ID here
-  const BIN_KEY = "";                           // ← paste jsonbin.io API key here
-  const EMAILJS_SERVICE = "YOUR_SERVICE_ID";   // ← EmailJS service ID
-  const EMAILJS_TEMPLATE = "YOUR_TEMPLATE_ID"; // ← EmailJS template ID
-  const EMAILJS_KEY = "YOUR_PUBLIC_KEY";       // ← EmailJS public key
-  // ────────────────────────────────────────────────────────────────
+function setImg(input, idx) {
+  if (!input.files || !input.files[0]) return;
+  const url = URL.createObjectURL(input.files[0]);
+  const placeholder = input.previousElementSibling;
+  placeholder.innerHTML = '';
+  placeholder.style.padding = '0';
+  placeholder.style.cursor = 'default';
+  const img = document.createElement('img');
+  img.src = url;
+  img.style.cssText = 'width:100%;height:180px;object-fit:cover;display:block;';
+  placeholder.appendChild(img);
+}
 
-  emailjs.init(EMAILJS_KEY);
+const STATUS_MAP = {
+  online:  { color: '#23a55a', label: 'Online' },
+  idle:    { color: '#f0b232', label: 'Idle' },
+  dnd:     { color: '#f23f43', label: 'Do Not Disturb' },
+  offline: { color: '#747f8d', label: 'Offline' }
+};
 
-  // Default status
-  let STATUS = { bot: false, web: false, collab: false };
-
-  // ── JSONBIN HELPERS ─────────────────────────────────────────────
-  async function fetchStatus() {
-    if (!BIN_ID || !BIN_KEY) return;
-    try {
-      const r = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-        headers: { "X-Master-Key": BIN_KEY }
-      });
-      const d = await r.json();
-      STATUS = d.record;
-      applyStatus();
-    } catch(e) {}
-  }
-
-  async function pushStatus() {
-    if (!BIN_ID || !BIN_KEY) { applyStatus(); return; }
-    await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json", "X-Master-Key": BIN_KEY },
-      body: JSON.stringify(STATUS)
-    });
-  }
-
-  // ── APPLY STATUS TO UI ──────────────────────────────────────────
-  function applyStatus() {
-    const map = {
-      bot:   { dot:"sdot-bot",   badge:"sbadge-bot",   text:"stext-bot",   desc:"sdesc-bot",   openDesc:"Open for new bot commissions!", closedDesc:"Not taking on new bot projects right now. Check back later." },
-      web:   { dot:"sdot-web",   badge:"sbadge-web",   text:"stext-web",   desc:"sdesc-web",   openDesc:"Taking on new website work!", closedDesc:"Web projects paused at the moment." },
-      collab:{ dot:"sdot-collab",badge:"sbadge-collab",text:"stext-collab",desc:"sdesc-collab",openDesc:"Open to collabs and partnerships!", closedDesc:"Not looking for partnerships or collaborations right now." }
-    };
-    Object.entries(map).forEach(([k, v]) => {
-      const on = STATUS[k];
-      const dot = document.getElementById(v.dot);
-      const badge = document.getElementById(v.badge);
-      const text = document.getElementById(v.text);
-      const desc = document.getElementById(v.desc);
-      dot.className = "dot" + (on ? " open" : "");
-      badge.className = "status-badge" + (on ? " open" : "");
-      text.textContent = on ? "Open" : "Closed";
-      desc.textContent = on ? v.openDesc : v.closedDesc;
-    });
-
-    // Project card badges
-    const bots = STATUS.bot;
-    const web = STATUS.web;
-    ["badge-tropica","badge-torch"].forEach(id => {
-      const el = document.getElementById(id);
-      el.textContent = bots ? "● Open" : "● Closed";
-      el.style.color = bots ? "#2d7a3a" : "#999";
-      el.style.borderColor = bots ? "#b5debb" : "#ddd";
-      el.style.background = bots ? "#f0faf2" : "#f7f7f7";
-    });
-    const ba = document.getElementById("badge-anticipy");
-    ba.textContent = web ? "● Open" : "● Closed";
-    ba.style.color = web ? "#2d7a3a" : "#999";
-    ba.style.borderColor = web ? "#b5debb" : "#ddd";
-    ba.style.background = web ? "#f0faf2" : "#f7f7f7";
-
-    // Summary label
-    const openCount = Object.values(STATUS).filter(Boolean).length;
-    document.getElementById("status-summary").textContent =
-      openCount === 0 ? "all closed" : openCount === 3 ? "all open" : `${openCount} open`;
-  }
-
-  // ── ADMIN PANEL ─────────────────────────────────────────────────
-  document.getElementById("logo-btn").addEventListener("click", () => {
-    document.getElementById("admin-overlay").classList.add("open");
-    document.getElementById("pw-input").focus();
-  });
-  document.getElementById("admin-close-btn").addEventListener("click", closeAdmin);
-  document.getElementById("admin-overlay").addEventListener("click", e => { if(e.target === document.getElementById("admin-overlay")) closeAdmin(); });
-
-  function closeAdmin() {
-    document.getElementById("admin-overlay").classList.remove("open");
-    setTimeout(() => {
-      document.getElementById("admin-controls").style.display = "none";
-      document.getElementById("admin-pw-screen").style.display = "flex";
-      document.getElementById("pw-input").value = "";
-      document.getElementById("pw-error").style.display = "none";
-    }, 250);
-  }
-
-  document.getElementById("pw-input").addEventListener("keydown", e => { if(e.key==="Enter") checkPw(); });
-
-  function checkPw() {
-    const v = document.getElementById("pw-input").value;
-    if (v === ADMIN_PASSWORD) {
-      document.getElementById("admin-pw-screen").style.display = "none";
-      document.getElementById("admin-controls").style.display = "block";
-      document.getElementById("toggle-bot").checked = STATUS.bot;
-      document.getElementById("toggle-web").checked = STATUS.web;
-      document.getElementById("toggle-collab").checked = STATUS.collab;
-    } else {
-      document.getElementById("pw-error").style.display = "block";
+async function fetchStatus() {
+  try {
+    const r = await fetch('https://api.lanyard.rest/v1/users/1396979947284729856');
+    const d = await r.json();
+    if (d.success) {
+      const s = d.data.discord_status || 'offline';
+      const { color, label } = STATUS_MAP[s] || STATUS_MAP.offline;
+      document.getElementById('dc-dot').style.background = color;
+      document.getElementById('dc-status-text').style.color = color;
+      document.getElementById('dc-status-text').textContent = label;
     }
+  } catch {
+    document.getElementById('dc-status-text').textContent = 'Do Not Disturb';
+    document.getElementById('dc-dot').style.background = '#f23f43';
+    document.getElementById('dc-status-text').style.color = '#f23f43';
   }
-
-  function updateToggleState() {}
-
-  async function saveStatus() {
-    STATUS.bot = document.getElementById("toggle-bot").checked;
-    STATUS.web = document.getElementById("toggle-web").checked;
-    STATUS.collab = document.getElementById("toggle-collab").checked;
-    const btn = document.getElementById("admin-save-btn");
-    const saving = document.getElementById("admin-saving");
-    btn.disabled = true; btn.textContent = "Saving…";
-    saving.style.display = "block";
-    await pushStatus();
-    applyStatus();
-    btn.disabled = false; btn.textContent = "Saved ✓";
-    saving.style.display = "none";
-    setTimeout(() => { btn.textContent = "Save Changes"; }, 1800);
-  }
-
-  // ── ORDER MODAL ─────────────────────────────────────────────────
-  let currentProject = null;
-  let currentService = null;
-
-  document.querySelectorAll(".project-card").forEach(card => {
-    card.addEventListener("click", () => {
-      const proj = card.dataset.name;
-      const type = card.dataset.project;
-      openOrderModal(proj, type);
-    });
-  });
-
-  document.getElementById("order-close-btn").addEventListener("click", closeOrder);
-  document.getElementById("order-overlay").addEventListener("click", e => { if(e.target === document.getElementById("order-overlay")) closeOrder(); });
-
-  function openOrderModal(name, type) {
-    currentProject = name;
-    currentService = type;
-    document.getElementById("order-modal-title").textContent = "Order — " + name;
-    document.getElementById("order-modal-sub").textContent = name.toLowerCase();
-    document.getElementById("order-success").style.display = "none";
-    document.getElementById("order-form-wrap").style.display = "block";
-
-    // Check if this type is open
-    const key = type === "Bot Commission" ? "bot" : "web";
-    const isOpen = STATUS[key];
-
-    document.getElementById("order-closed-block").style.display = isOpen ? "none" : "block";
-    document.getElementById("order-form-fields").style.display = isOpen ? "block" : "none";
-
-    document.getElementById("order-overlay").classList.add("open");
-  }
-
-  function closeOrder() {
-    document.getElementById("order-overlay").classList.remove("open");
-    setTimeout(() => {
-      document.getElementById("f-name").value = "";
-      document.getElementById("f-email").value = "";
-      document.getElementById("f-discord").value = "";
-      document.getElementById("f-desc").value = "";
-      document.getElementById("f-budget").value = "";
-      document.getElementById("form-submit-btn").disabled = false;
-      document.getElementById("form-submit-btn").textContent = "Send Request →";
-    }, 250);
-  }
-
-  async function submitOrder() {
-    const name = document.getElementById("f-name").value.trim();
-    const email = document.getElementById("f-email").value.trim();
-    const discord = document.getElementById("f-discord").value.trim();
-    const desc = document.getElementById("f-desc").value.trim();
-    const budget = document.getElementById("f-budget").value.trim();
-
-    if (!name || !email || !desc) { alert("Please fill in your name, email, and project description."); return; }
-
-    const btn = document.getElementById("form-submit-btn");
-    btn.disabled = true; btn.textContent = "Sending…";
-
-    try {
-      await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
-        to_email: "alie@mulgrave.com",
-        from_name: name,
-        from_email: email,
-        discord_username: discord || "Not provided",
-        project: currentProject,
-        service_type: currentService,
-        description: desc,
-        budget: budget || "Not specified"
-      });
-      document.getElementById("order-form-wrap").style.display = "none";
-      document.getElementById("order-success").style.display = "block";
-    } catch(e) {
-      btn.disabled = false; btn.textContent = "Send Request →";
-      alert("Something went wrong. Please try again or reach out on Discord.");
-    }
-  }
-
-  // ── SCROLL REVEAL ────────────────────────────────────────────────
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
-
-  // ── INIT ─────────────────────────────────────────────────────────
-  fetchStatus();
+}
+fetchStatus();
 </script>
 </body>
 </html>
