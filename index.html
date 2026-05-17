@@ -1,333 +1,1598 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Eshan — Bot Dev</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{--black:#0a0a0a;--white:#fff;--gray:#f5f5f5;--mid:#e8e8e8;--muted:#999;--text:#111;}
-html{scroll-behavior:smooth;}
-body{font-family:'Poppins',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
-a{text-decoration:none;color:inherit;}
-nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3.5rem;position:sticky;top:0;z-index:100;background:#ffffffee;backdrop-filter:blur(16px);border-bottom:1px solid #ebebeb;}
-.logo{font-weight:700;font-size:1rem;letter-spacing:-.3px;color:var(--black);}
-.nav-links{display:flex;gap:2.2rem;}
-.nav-links a{font-size:.8rem;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s;}
-.nav-links a:hover{color:var(--black);}
-.nav-right{display:flex;align-items:center;gap:1rem;}
-.btn-login{font-size:.8rem;font-weight:500;color:var(--muted);background:none;border:none;cursor:pointer;padding:.5rem;}
-.btn-cta{background:var(--black);color:var(--white);border:none;padding:.6rem 1.4rem;border-radius:100px;font-family:'Poppins',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:opacity .2s;}
-.btn-cta:hover{opacity:.8;}
-.hero{padding:7rem 3.5rem 5rem;max-width:1200px;margin:0 auto;}
-.hero-label{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;}
-.hero-label span{width:20px;height:1px;background:var(--muted);display:inline-block;}
-h1{font-size:clamp(3.5rem,7vw,6.5rem);font-weight:800;line-height:1;letter-spacing:-3px;margin-bottom:2rem;color:var(--black);}
-h1 em{font-style:italic;font-weight:300;color:var(--muted);}
-.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
-.hero-desc{font-size:1rem;color:var(--muted);line-height:1.75;max-width:380px;font-weight:400;}
-.hero-desc strong{color:var(--black);font-weight:600;}
-.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;}
-.btn-dark{background:var(--black);color:var(--white);border:none;padding:.8rem 2rem;border-radius:100px;font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .2s;}
-.btn-dark:hover{opacity:.75;}
-.btn-light{background:transparent;color:var(--black);border:1.5px solid #ddd;padding:.8rem 2rem;border-radius:100px;font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;}
-.btn-light:hover{border-color:#aaa;}
-.stats{border-top:1px solid #ebebeb;border-bottom:1px solid #ebebeb;padding:3.5rem;display:grid;grid-template-columns:repeat(4,1fr);max-width:1200px;margin:0 auto;}
-.stat-item{padding:0 2rem;border-right:1px solid #ebebeb;}
-.stat-item:first-child{padding-left:0;}
-.stat-item:last-child{border-right:none;}
-.stat-num{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-2px;color:var(--black);}
-.stat-lbl{font-size:.78rem;color:var(--muted);font-weight:400;margin-top:.2rem;}
-.section{padding:6rem 3.5rem;max-width:1200px;margin:0 auto;}
-.s-eyebrow{font-size:.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
-.s-heading{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-1.5px;color:var(--black);margin-bottom:.7rem;line-height:1.1;}
-.s-heading em{font-style:italic;font-weight:300;color:var(--muted);}
-.s-sub{font-size:.9rem;color:var(--muted);line-height:1.75;max-width:420px;}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.6rem;margin-top:3rem;}
-.skill{background:var(--gray);border-radius:14px;padding:1.6rem 1.4rem;transition:all .25s;cursor:default;}
-.skill:hover{background:#111;color:#fff;}
-.skill:hover .sk-sub{color:#666;}
-.sk-ico{font-size:1.5rem;margin-bottom:.8rem;}
-.sk-name{font-size:.85rem;font-weight:700;}
-.sk-sub{font-size:.7rem;color:var(--muted);margin-top:.25rem;font-weight:400;}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Eshan — Bot Dev</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* PROJECT CARDS */
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-top:3rem;}
-.proj-card{border:1.5px solid #ebebeb;border-radius:20px;overflow:hidden;transition:all .25s;}
-.proj-card:hover{border-color:#ccc;transform:translateY(-3px);}
-.proj-card.featured{background:var(--black);color:var(--white);border-color:var(--black);}
-.proj-img{width:100%;height:180px;object-fit:cover;display:block;background:#f0f0f0;}
-.proj-img-placeholder{width:100%;height:180px;background:#f5f5f5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;cursor:pointer;transition:background .2s;border-bottom:1px solid #ebebeb;}
-.proj-img-placeholder:hover{background:#eee;}
-.proj-img-placeholder span{font-size:.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#bbb;}
-.proj-card.featured .proj-img-placeholder{background:#161616;border-bottom:1px solid #1e1e1e;}
-.proj-card.featured .proj-img-placeholder span{color:#333;}
-.proj-body{padding:1.8rem;}
-.proj-num{font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:1px;margin-bottom:1rem;}
-.proj-card.featured .proj-num{color:#444;}
-.proj-card.featured .p-desc{color:#666;}
-.proj-card.featured .p-tag{background:#1e1e1e;color:#555;border-color:#2a2a2a;}
-.p-name{font-size:1.2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.6rem;}
-.p-desc{font-size:.83rem;color:var(--muted);line-height:1.75;margin-bottom:1.4rem;}
-.p-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
-.p-tag{font-size:.65rem;font-weight:600;letter-spacing:.3px;background:var(--gray);color:var(--muted);border:1px solid var(--mid);padding:.3rem .8rem;border-radius:100px;}
+        :root {
+            --black: #0a0a0a;
+            --white: #fff;
+            --gray: #f5f5f5;
+            --mid: #e8e8e8;
+            --muted: #999;
+            --text: #111;
+        }
 
-/* IMAGE UPLOAD */
-.img-upload-input{display:none;}
+        html {
+            scroll-behavior: smooth;
+        }
 
-/* ABOUT */
-.about-wrap{background:var(--black);color:var(--white);padding:6rem 3.5rem;}
-.about-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:5rem;align-items:center;}
-.about-wrap .s-eyebrow{color:#555;}
-.about-wrap .s-heading{color:var(--white);}
-.about-wrap .s-heading em{color:#555;}
-.about-wrap p{font-size:.95rem;color:#666;line-height:1.85;margin-top:1.5rem;}
-.about-wrap strong{color:#aaa;font-weight:600;}
-.dc-card{background:#111;border:1px solid #1e1e1e;border-radius:20px;padding:2rem;}
-.dc-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;}
-.dc-av{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #222;}
-.dc-name{font-weight:700;font-size:.95rem;color:#fff;}
-.dc-handle{font-size:.75rem;color:#555;margin-top:.15rem;}
-.dc-status{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:600;}
-.dc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.dc-divider{border:none;border-top:1px solid #1e1e1e;margin:1.2rem 0;}
-.dc-stack{display:flex;flex-wrap:wrap;gap:.5rem;}
-.dc-tag{font-size:.68rem;font-weight:600;background:#1a1a1a;color:#555;border:1px solid #222;padding:.3rem .8rem;border-radius:100px;}
-.cta-wrap{padding:6rem 3.5rem;max-width:1200px;margin:0 auto;text-align:center;}
-.cta-wrap h2{font-size:clamp(2.5rem,6vw,5rem);font-weight:800;letter-spacing:-3px;color:var(--black);line-height:1;margin-bottom:1.5rem;}
-.cta-wrap h2 em{font-style:italic;font-weight:300;color:var(--muted);}
-.cta-wrap p{font-size:.95rem;color:var(--muted);max-width:360px;margin:0 auto 2.5rem;line-height:1.75;}
-.cta-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
-footer{border-top:1px solid #ebebeb;padding:1.6rem 3.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.f-copy{font-size:.75rem;color:var(--muted);font-weight:400;}
-.f-dc{font-size:.75rem;font-weight:600;color:#5865F2;}
-@keyframes tapescroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-@media(max-width:768px){
-  nav,footer{padding:1rem 1.5rem;}.nav-links{display:none;}
-  .hero,.cta-wrap{padding:4rem 1.5rem 3rem;}
-  .stats{padding:2.5rem 1.5rem;grid-template-columns:1fr 1fr;gap:2rem;}
-  .stat-item{border-right:none;padding:0;}
-  .section{padding:4rem 1.5rem;}
-  .about-wrap{padding:4rem 1.5rem;}
-  .about-inner{grid-template-columns:1fr;gap:2.5rem;}
-  h1{letter-spacing:-2px;}
-}
-</style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--white);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 3.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #ffffffee;
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid #ebebeb;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: -.3px;
+            color: var(--black);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+        }
+
+        .nav-links a {
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--black);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-login {
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--muted);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: .5rem;
+        }
+
+        .btn-cta {
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            padding: .6rem 1.4rem;
+            border-radius: 100px;
+            font-family: 'Poppins', sans-serif;
+            font-size: .8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity .2s;
+        }
+
+        .btn-cta:hover {
+            opacity: .8;
+        }
+
+        .hero {
+            padding: 7rem 3.5rem 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .hero-label span {
+            width: 20px;
+            height: 1px;
+            background: var(--muted);
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: clamp(3.5rem, 7vw, 6.5rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-bottom: 2rem;
+            color: var(--black);
+        }
+
+        h1 em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--muted);
+        }
+
+        .hero-bottom {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--muted);
+            line-height: 1.75;
+            max-width: 380px;
+            font-weight: 400;
+        }
+
+        .hero-desc strong {
+            color: var(--black);
+            font-weight: 600;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: .8rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-dark {
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            padding: .8rem 2rem;
+            border-radius: 100px;
+            font-family: 'Poppins', sans-serif;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity .2s;
+        }
+
+        .btn-dark:hover {
+            opacity: .75;
+        }
+
+        .btn-light {
+            background: transparent;
+            color: var(--black);
+            border: 1.5px solid #ddd;
+            padding: .8rem 2rem;
+            border-radius: 100px;
+            font-family: 'Poppins', sans-serif;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .btn-light:hover {
+            border-color: #aaa;
+        }
+
+        .stats {
+            border-top: 1px solid #ebebeb;
+            border-bottom: 1px solid #ebebeb;
+            padding: 3.5rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            padding: 0 2rem;
+            border-right: 1px solid #ebebeb;
+        }
+
+        .stat-item:first-child {
+            padding-left: 0;
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: var(--black);
+        }
+
+        .stat-lbl {
+            font-size: .78rem;
+            color: var(--muted);
+            font-weight: 400;
+            margin-top: .2rem;
+        }
+
+        .section {
+            padding: 6rem 3.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .s-eyebrow {
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .s-heading {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: var(--black);
+            margin-bottom: .7rem;
+            line-height: 1.1;
+        }
+
+        .s-heading em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--muted);
+        }
+
+        .s-sub {
+            font-size: .9rem;
+            color: var(--muted);
+            line-height: 1.75;
+            max-width: 420px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: .6rem;
+            margin-top: 3rem;
+        }
+
+        .skill {
+            background: var(--gray);
+            border-radius: 14px;
+            padding: 1.6rem 1.4rem;
+            transition: all .25s;
+            cursor: default;
+        }
+
+        .skill:hover {
+            background: #111;
+            color: #fff;
+        }
+
+        .skill:hover .sk-sub {
+            color: #666;
+        }
+
+        .sk-ico {
+            font-size: 1.5rem;
+            margin-bottom: .8rem;
+        }
+
+        .sk-name {
+            font-size: .85rem;
+            font-weight: 700;
+        }
+
+        .sk-sub {
+            font-size: .7rem;
+            color: var(--muted);
+            margin-top: .25rem;
+            font-weight: 400;
+        }
+
+        /* PROJECT CARDS */
+        .proj-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .proj-card {
+            border: 1.5px solid #ebebeb;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all .25s;
+        }
+
+        .proj-card:hover {
+            border-color: #ccc;
+            transform: translateY(-3px);
+        }
+
+        .proj-card.featured {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        .proj-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            background: #f0f0f0;
+        }
+
+        .proj-img-placeholder {
+            width: 100%;
+            height: 180px;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            cursor: pointer;
+            transition: background .2s;
+            border-bottom: 1px solid #ebebeb;
+        }
+
+        .proj-img-placeholder:hover {
+            background: #eee;
+        }
+
+        .proj-img-placeholder span {
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #bbb;
+        }
+
+        .proj-card.featured .proj-img-placeholder {
+            background: #161616;
+            border-bottom: 1px solid #1e1e1e;
+        }
+
+        .proj-card.featured .proj-img-placeholder span {
+            color: #333;
+        }
+
+        .proj-body {
+            padding: 1.8rem;
+        }
+
+        .proj-num {
+            font-size: .7rem;
+            font-weight: 600;
+            color: var(--muted);
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .proj-card.featured .proj-num {
+            color: #444;
+        }
+
+        .proj-card.featured .p-desc {
+            color: #aaa;
+        }
+
+        .proj-card.featured .p-tag {
+            background: #1e1e1e;
+            color: #ccc;
+            border-color: #333;
+        }
+
+        .p-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -.5px;
+            margin-bottom: .6rem;
+        }
+
+        .p-desc {
+            font-size: .83rem;
+            color: var(--muted);
+            line-height: 1.75;
+            margin-bottom: 1.4rem;
+        }
+
+        .p-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem;
+        }
+
+        .p-tag {
+            font-size: .65rem;
+            font-weight: 600;
+            letter-spacing: .3px;
+            background: var(--gray);
+            color: var(--muted);
+            border: 1px solid var(--mid);
+            padding: .3rem .8rem;
+            border-radius: 100px;
+        }
+
+        /* IMAGE UPLOAD */
+        .img-upload-input {
+            display: none;
+        }
+
+        /* ABOUT */
+        .about-wrap {
+            background: var(--black);
+            color: var(--white);
+            padding: 6rem 3.5rem;
+        }
+
+        .about-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-wrap .s-eyebrow {
+            color: #555;
+        }
+
+        .about-wrap .s-heading {
+            color: var(--white);
+        }
+
+        .about-wrap .s-heading em {
+            color: #555;
+        }
+
+        .about-wrap p {
+            font-size: .95rem;
+            color: #666;
+            line-height: 1.85;
+            margin-top: 1.5rem;
+        }
+
+        .about-wrap strong {
+            color: #aaa;
+            font-weight: 600;
+        }
+
+        .dc-card {
+            background: #111;
+            border: 1px solid #1e1e1e;
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .dc-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .dc-av {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #222;
+        }
+
+        .dc-name {
+            font-weight: 700;
+            font-size: .95rem;
+            color: #fff;
+        }
+
+        .dc-handle {
+            font-size: .75rem;
+            color: #555;
+            margin-top: .15rem;
+        }
+
+        .dc-status {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .72rem;
+            font-weight: 600;
+        }
+
+        .dc-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dc-divider {
+            border: none;
+            border-top: 1px solid #1e1e1e;
+            margin: 1.2rem 0;
+        }
+
+        .dc-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+
+        .dc-tag {
+            font-size: .68rem;
+            font-weight: 600;
+            background: #1a1a1a;
+            color: #555;
+            border: 1px solid #222;
+            padding: .3rem .8rem;
+            border-radius: 100px;
+        }
+
+        .cta-wrap {
+            padding: 6rem 3.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta-wrap h2 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -3px;
+            color: var(--black);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-wrap h2 em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--muted);
+        }
+
+        .cta-wrap p {
+            font-size: .95rem;
+            color: var(--muted);
+            max-width: 360px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: .8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            border-top: 1px solid #ebebeb;
+            padding: 1.6rem 3.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .f-copy {
+            font-size: .75rem;
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .f-dc {
+            font-size: .75rem;
+            font-weight: 600;
+            color: #5865F2;
+        }
+
+        @keyframes tapescroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media(max-width:768px) {
+
+            nav,
+            footer {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero,
+            .cta-wrap {
+                padding: 4rem 1.5rem 3rem;
+            }
+
+            .stats {
+                padding: 2.5rem 1.5rem;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .stat-item {
+                border-right: none;
+                padding: 0;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .about-wrap {
+                padding: 4rem 1.5rem;
+            }
+
+            .about-inner {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+        }
+
+        /* Discord OAuth Modal Styles */
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 8px 24px rgba(88, 101, 242, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 8px 36px rgba(88, 101, 242, 0.75);
+            }
+
+            100% {
+                box-shadow: 0 8px 24px rgba(88, 101, 242, 0.4);
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<nav>
-  <div class="logo">Eshan</div>
-  <div class="nav-links">
-    <a href="#skills">Skills</a>
-    <a href="#work">Past Work</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <div class="nav-right">
-    <button class="btn-login">noteshan</button>
-    <button class="btn-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
-  </div>
-</nav>
-
-<div style="max-width:1200px;margin:0 auto;">
-<div class="hero">
-  <div class="hero-label"><span></span> Discord Bot Developer</div>
-  <h1>Building bots<br>that <em>actually</em><br>work.</h1>
-  <div class="hero-bottom">
-    <p class="hero-desc">I'm <strong>Eshan</strong> — I build custom Discord bots with <strong>JavaScript & Discord.js</strong>. From moderation to full automation, fast and clean.</p>
-    <div class="hero-actions">
-      <button class="btn-dark" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">View Past Work</button>
-      <button class="btn-light" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
-    </div>
-  </div>
-</div>
-</div>
-
-<div style="border-top:1px solid #ebebeb;border-bottom:1px solid #ebebeb;">
-<div class="stats">
-  <div class="stat-item"><div class="stat-num">JS</div><div class="stat-lbl">primary language</div></div>
-  <div class="stat-item"><div class="stat-num">v14</div><div class="stat-lbl">discord.js version</div></div>
-  <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-lbl">uptime focused</div></div>
-  <div class="stat-item"><div class="stat-num">Open</div><div class="stat-lbl">for commissions</div></div>
-</div>
-</div>
-
-<div class="section" id="skills">
-  <div class="s-eyebrow">Expertise</div>
-  <div class="s-heading">What I <em>build with</em></div>
-  <p class="s-sub">The tools behind every bot I ship — clean, modern, and built to last.</p>
-  <div class="skills-grid">
-    <div class="skill"><div class="sk-ico">🟨</div><div class="sk-name">JavaScript</div><div class="sk-sub">ES2022+</div></div>
-    <div class="skill"><div class="sk-ico">🤖</div><div class="sk-name">Discord.js</div><div class="sk-sub">v14 / Slash Commands</div></div>
-    <div class="skill"><div class="sk-ico">🟢</div><div class="sk-name">Node.js</div><div class="sk-sub">Runtime & Hosting</div></div>
-    <div class="skill"><div class="sk-ico">🍃</div><div class="sk-name">MongoDB</div><div class="sk-sub">Data Persistence</div></div>
-    <div class="skill"><div class="sk-ico">🔗</div><div class="sk-name">REST APIs</div><div class="sk-sub">Integrations</div></div>
-    <div class="skill"><div class="sk-ico">⚡</div><div class="sk-name">Fast Delivery</div><div class="sk-sub">Documented Code</div></div>
-  </div>
-</div>
-
-<!-- POLICE TAPE -->
-<div style="overflow:hidden;line-height:0;user-select:none;">
-  <div style="background:repeating-linear-gradient(135deg,#1a1a1a 0px,#1a1a1a 20px,#2a2a2a 20px,#2a2a2a 40px);height:18px;"></div>
-  <div style="background:#d4bc6a22;padding:.5rem 0;white-space:nowrap;overflow:hidden;border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;">
-    <span style="display:inline-block;animation:tapescroll 22s linear infinite;">
-      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
-      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
-      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
-      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
-      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
-      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
-      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
-      <span style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST WORK — DO NOT SKIP</span>
-    </span>
-  </div>
-  <div style="background:repeating-linear-gradient(135deg,#1a1a1a 0px,#1a1a1a 20px,#2a2a2a 20px,#2a2a2a 40px);height:18px;"></div>
-</div>
-
-<!-- PAST WORK -->
-<div class="section" id="work">
-  <div class="s-eyebrow">Past Work</div>
-  <div class="s-heading">Selected <em>projects</em></div>
-  <p class="s-sub">Click the image area on any card to add a screenshot or preview. Have an idea? I'm open for commissions.</p>
-  <div class="proj-grid">
-
-    <div class="proj-card featured">
-      <div class="proj-img-placeholder" onclick="document.getElementById('img0').click()" title="Click to add image">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Add Image</span>
-      </div>
-      <input class="img-upload-input" type="file" id="img0" accept="image/*" onchange="setImg(this,0)"/>
-      <div class="proj-body">
-        <div class="proj-num">01 — Featured</div>
-        <div class="p-name">GuardBot</div>
-        <p class="p-desc">Full-featured moderation suite with auto-mod, action logging, warn/ban/mute workflows and rich audit logs.</p>
-        <div class="p-tags"><span class="p-tag">Discord.js</span><span class="p-tag">MongoDB</span><span class="p-tag">Slash Commands</span></div>
-      </div>
-    </div>
-
-    <div class="proj-card">
-      <div class="proj-img-placeholder" onclick="document.getElementById('img1').click()" title="Click to add image">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Add Image</span>
-      </div>
-      <input class="img-upload-input" type="file" id="img1" accept="image/*" onchange="setImg(this,1)"/>
-      <div class="proj-body">
-        <div class="proj-num">02</div>
-        <div class="p-name">ServerUtils</div>
-        <p class="p-desc">Multi-purpose utility bot — giveaways, polls, reminders, custom embeds, and role management at scale.</p>
-        <div class="p-tags"><span class="p-tag">Node.js</span><span class="p-tag">SQLite</span><span class="p-tag">REST API</span></div>
-      </div>
-    </div>
-
-    <div class="proj-card">
-      <div class="proj-img-placeholder" onclick="document.getElementById('img2').click()" title="Click to add image">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Add Image</span>
-      </div>
-      <input class="img-upload-input" type="file" id="img2" accept="image/*" onchange="setImg(this,2)"/>
-      <div class="proj-body">
-        <div class="proj-num">03 — Open</div>
-        <div class="p-name">Your Bot</div>
-        <p class="p-desc">Got an idea? I build custom bots to spec — from simple commands to complex automation. Ping me.</p>
-        <div class="p-tags"><span class="p-tag">Custom Scope</span><span class="p-tag">On Request</span></div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ABOUT -->
-<div class="about-wrap" id="about">
-  <div class="about-inner">
-    <div>
-      <div class="s-eyebrow">Background</div>
-      <div class="s-heading" style="color:#fff;">About <em style="color:#444;">me</em></div>
-      <p>I'm <strong>Eshan</strong> — a Discord bot developer who writes clean, production-ready <strong>JavaScript</strong> using the latest Discord.js APIs.</p>
-      <p>I care about shipping things that are reliable and fast. No bloat — just solid bots that do exactly what you need, with code you can actually read.</p>
-      <p>Find me on Discord as <strong>noteshan</strong> — always open to commissions and collabs.</p>
-    </div>
-    <div class="dc-card">
-      <div class="dc-row">
-        <img class="dc-av" src="https://images-ext-1.discordapp.net/external/9qVqbtNjX7ZIKXOFOUGMPp-uj1wgNxLY84tbtvwfiH0/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/1396979947284729856/192a0185852a8e51ba373b0efdbf7c6b.webp?format=webp&width=200&height=200" alt="Eshan"/>
-        <div>
-          <div class="dc-name">Eshan</div>
-          <div class="dc-handle">@noteshan</div>
+    <nav>
+        <div class="logo">Eshan</div>
+        <div class="nav-links">
+            <a href="#skills">Skills</a>
+            <a href="#work">Past Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
         </div>
-      </div>
-      <div class="dc-status" id="dc-status-row">
-        <span class="dc-dot" id="dc-dot" style="background:#747f8d;"></span>
-        <span id="dc-status-text" style="color:#747f8d;">Fetching status...</span>
-      </div>
-      <div class="dc-divider"></div>
-      <div style="font-size:.68rem;color:#444;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-bottom:.7rem;">Stack</div>
-      <div class="dc-stack">
-        <span class="dc-tag">JavaScript</span>
-        <span class="dc-tag">Discord.js v14</span>
-        <span class="dc-tag">Node.js</span>
-        <span class="dc-tag">MongoDB</span>
-        <span class="dc-tag">REST APIs</span>
-      </div>
+        <div class="nav-right">
+            <button class="btn-login" id="nav-login-btn" onclick="openOAuthModal()">noteshan</button>
+            <button class="btn-cta" onclick="openOAuthModal()">Hire Me</button>
+        </div>
+    </nav>
+
+    <div style="max-width:1200px;margin:0 auto;">
+        <div class="hero">
+            <div class="hero-label"><span></span> Discord Bot Developer</div>
+            <h1>Building bots<br>that <em>actually</em><br>work.</h1>
+            <div class="hero-bottom">
+                <p class="hero-desc">I'm <strong>Eshan</strong> — I build custom Discord bots with <strong>JavaScript &
+                        Discord.js</strong>. From moderation to full automation, fast and clean.</p>
+                <div class="hero-actions">
+                    <button class="btn-dark"
+                        onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">View Past
+                        Work</button>
+                    <button class="btn-light" onclick="openOAuthModal()">Get in Touch</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<!-- CTA -->
-<div class="cta-wrap" id="contact">
-  <div class="s-eyebrow" style="margin-bottom:1rem;">Let's build</div>
-  <h2>Got a<br><em>bot idea?</em></h2>
-  <p>Open for commissions and collabs. Shoot me a message on Discord.</p>
-  <div class="cta-btns">
-    <button class="btn-dark" onclick="window.open('https://discord.com/users/1396979947284729856','_blank')">Message on Discord</button>
-    <button class="btn-light">View GitHub</button>
-  </div>
-</div>
+    <div style="border-top:1px solid #ebebeb;border-bottom:1px solid #ebebeb;">
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-num">JS</div>
+                <div class="stat-lbl">primary language</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">v14</div>
+                <div class="stat-lbl">discord.js version</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">24/7</div>
+                <div class="stat-lbl">uptime focused</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">Open</div>
+                <div class="stat-lbl">for commissions</div>
+            </div>
+        </div>
+    </div>
 
-<footer>
-  <span class="f-copy">© 2026 Eshan. All rights reserved.</span>
-  <span class="f-dc">discord: noteshan</span>
-</footer>
+    <div class="section" id="skills">
+        <div class="s-eyebrow">Expertise</div>
+        <div class="s-heading">What I <em>build with</em></div>
+        <p class="s-sub">The tools behind every bot I ship — clean, modern, and built to last.</p>
+        <div class="skills-grid">
+            <div class="skill">
+                <div class="sk-ico">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        style="filter: drop-shadow(0 2px 5px rgba(247, 223, 30, 0.25)); display: block;">
+                        <rect width="24" height="24" rx="4" fill="#F7DF1E" />
+                        <path
+                            d="M18.8 17.2c-.3.8-.9 1.4-1.8 1.6-1 .3-2 .1-2.6-.4-.5-.4-.7-.9-.8-1.7h1.7c.1.5.3.7.6.9.3.2.7.2.9 0 .3-.2.4-.6.4-1.2V9.3h1.8v7.9h-.2zm-5.7.2c-.3.6-.8 1.1-1.5 1.3-.7.2-1.4.1-2-.2-.5-.3-.8-.8-1-1.4h1.7c.1.3.3.5.5.6.3.1.6.1.8 0 .3-.1.4-.4.4-.8s-.1-.6-.4-.7c-.3-.1-.7-.3-1.1-.4-.6-.2-1.1-.4-1.4-.7-.4-.3-.6-.8-.6-1.5s.2-1.1.7-1.4c.5-.3 1.2-.4 1.9-.3.6.1 1.2.4 1.5.8.3.4.4.9.4 1.6h-1.7c0-.3-.2-.5-.4-.6-.2-.1-.5-.1-.7 0-.2.1-.3.2-.3.5s.1.4.3.5c.2.1.6.2 1.1.4.6.2 1 .4 1.3.7.3.3.5.8.5 1.5 0 .3-.1.7-.2.8z"
+                            fill="#000000" />
+                    </svg>
+                </div>
+                <div class="sk-name">JavaScript</div>
+                <div class="sk-sub">ES2022+</div>
+            </div>
+            <div class="skill">
+                <div class="sk-ico">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        style="filter: drop-shadow(0 2px 5px rgba(88, 101, 242, 0.25)); display: block;">
+                        <rect width="24" height="24" rx="4" fill="#5865F2" />
+                        <path
+                            d="M17.8 7.3c-.6-.6-1.4-.9-2.1-1.1l-.2.4c.7.2 1.4.5 2 .9-.5-.3-1.1-.5-1.7-.7-.7-.2-1.4-.3-2.1-.3s-1.4.1-2.1.3c-.6.2-1.2.4-1.7.7.6-.4 1.3-.7 2-.9l-.2-.4c-.7.2-1.5.5-2.1 1.1C6.2 9.8 5.5 13.5 6 17.2c.8.8 2 1.3 3.1 1.3l.6-.7c-.7-.2-1.4-.6-1.9-1.1.2.1.4.3.7.4a7 7 0 005 0c.3-.1.5-.3.7-.4-.5.5-1.2.9-1.9 1.1l.6.7c1.1 0 2.3-.5 3.1-1.3.5-3.7-.2-7.4-1.5-9.9zM10.2 14c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm3.6 0c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"
+                            fill="#FFFFFF" />
+                    </svg>
+                </div>
+                <div class="sk-name">Discord.js</div>
+                <div class="sk-sub">v14 / Slash Commands</div>
+            </div>
+            <div class="skill">
+                <div class="sk-ico">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        style="filter: drop-shadow(0 2px 5px rgba(51, 153, 51, 0.25)); display: block;">
+                        <rect width="24" height="24" rx="4" fill="#339933" />
+                        <path
+                            d="M12 4.5l6.5 3.8v7.4L12 19.5l-6.5-3.8V8.3L12 4.5zm0 1.6l-5.1 3v6l5.1 3 5.1-3v-6l-5.1-3zm-1.8 4.8c.4-.3.9-.4 1.4-.4s1 .1 1.4.4c.3.3.4.7.4 1.2h-1.5c0-.2-.1-.3-.2-.4-.1-.1-.3-.1-.5-.1s-.4 0-.5.1c-.1.1-.2.2-.2.4s.1.3.2.4c.1.1.3.2.6.3.4.1.8.3 1 .5.3.2.4.6.4 1s-.1.8-.4 1c-.3.3-.8.4-1.3.4s-1-.1-1.4-.4c-.3-.3-.4-.7-.4-1.2h1.5c0 .2.1.3.2.4.1.1.3.1.5.1s.4 0 .5-.1c.1-.1.2-.2.2-.4s-.1-.3-.2-.4c-.1-.1-.3-.2-.6-.3-.4-.1-.8-.3-1-.5-.3-.2-.4-.6-.4-1s.1-.8.4-1z"
+                            fill="#FFFFFF" />
+                    </svg>
+                </div>
+                <div class="sk-name">Node.js</div>
+                <div class="sk-sub">Runtime & Hosting</div>
+            </div>
+            <div class="skill">
+                <div class="sk-ico">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        style="filter: drop-shadow(0 2px 5px rgba(71, 162, 72, 0.25)); display: block;">
+                        <rect width="24" height="24" rx="4" fill="#116149" />
+                        <path
+                            d="M12 4s-4 4.5-4 8.5c0 2.2 1.8 4 4 4s4-1.8 4-4C16 8.5 12 4 12 4zm0 10.5c-1 0-1.8-.8-1.8-1.8S11 11 12 11s1.8.8 1.8 1.8-.8 1.7-1.8 1.7z"
+                            fill="#13AA52" />
+                        <path d="M12 2v20" stroke="#FFFFFF" stroke-width="1.2" opacity="0.6" />
+                    </svg>
+                </div>
+                <div class="sk-name">MongoDB</div>
+                <div class="sk-sub">Data Persistence</div>
+            </div>
+            <div class="skill">
+                <div class="sk-ico">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        style="filter: drop-shadow(0 2px 5px rgba(0, 180, 219, 0.3)); display: block;">
+                        <rect width="24" height="24" rx="4" fill="#00b4db" stroke="none" />
+                        <path d="M7 16h10M7 8h10M12 8v8M7 12h10" opacity="0.4" stroke-width="1.5" />
+                        <circle cx="7" cy="12" r="2.5" fill="#00b4db" />
+                        <circle cx="17" cy="12" r="2.5" fill="#00b4db" />
+                        <circle cx="12" cy="8" r="2.5" fill="#00b4db" />
+                        <circle cx="12" cy="16" r="2.5" fill="#00b4db" />
+                    </svg>
+                </div>
+                <div class="sk-name">REST APIs</div>
+                <div class="sk-sub">Integrations</div>
+            </div>
+            <div class="skill">
+                <div class="sk-ico">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        style="filter: drop-shadow(0 2px 5px rgba(249, 212, 35, 0.3)); display: block;">
+                        <rect width="24" height="24" rx="4" fill="#f9d423" stroke="none" />
+                        <path d="M13 3L5 12h7l-1 9 8-9h-7l1-9z" fill="#FFFFFF" stroke="none" />
+                    </svg>
+                </div>
+                <div class="sk-name">Fast Delivery</div>
+                <div class="sk-sub">Documented Code</div>
+            </div>
+        </div>
+    </div>
 
-<script>
-function setImg(input, idx) {
-  if (!input.files || !input.files[0]) return;
-  const url = URL.createObjectURL(input.files[0]);
-  const placeholder = input.previousElementSibling;
-  placeholder.innerHTML = '';
-  placeholder.style.padding = '0';
-  placeholder.style.cursor = 'default';
-  const img = document.createElement('img');
-  img.src = url;
-  img.style.cssText = 'width:100%;height:180px;object-fit:cover;display:block;';
-  placeholder.appendChild(img);
-}
+    <!-- POLICE TAPE -->
+    <div style="overflow:hidden;line-height:0;user-select:none;">
+        <div
+            style="background:repeating-linear-gradient(135deg,#1a1a1a 0px,#1a1a1a 20px,#2a2a2a 20px,#2a2a2a 40px);height:18px;">
+        </div>
+        <div
+            style="background:#d4bc6a22;padding:.5rem 0;white-space:nowrap;overflow:hidden;border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;">
+            <span style="display:inline-block;animation:tapescroll 22s linear infinite;">
+                <span
+                    style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST
+                    WORK — DO NOT SKIP</span>
+                <span
+                    style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST
+                    WORK — DO NOT SKIP</span>
+                <span
+                    style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST
+                    WORK — DO NOT SKIP</span>
+                <span
+                    style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST
+                    WORK — DO NOT SKIP</span>
+                <span
+                    style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST
+                    WORK — DO NOT SKIP</span>
+                <span
+                    style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST
+                    WORK — DO NOT SKIP</span>
+                <span
+                    style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST
+                    WORK — DO NOT SKIP</span>
+                <span
+                    style="font-family:'Poppins',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:3px;color:#bbb;padding:0 2.5rem;">PAST
+                    WORK — DO NOT SKIP</span>
+            </span>
+        </div>
+        <div
+            style="background:repeating-linear-gradient(135deg,#1a1a1a 0px,#1a1a1a 20px,#2a2a2a 20px,#2a2a2a 40px);height:18px;">
+        </div>
+    </div>
 
-const STATUS_MAP = {
-  online:  { color: '#23a55a', label: 'Online' },
-  idle:    { color: '#f0b232', label: 'Idle' },
-  dnd:     { color: '#f23f43', label: 'Do Not Disturb' },
-  offline: { color: '#747f8d', label: 'Offline' }
-};
+    <!-- PAST WORK -->
+    <div class="section" id="work">
+        <div class="s-eyebrow">Past Work</div>
+        <div class="s-heading">Selected <em>projects</em></div>
+        <p class="s-sub">A showcase of systems and communities I've helped build and scale.</p>
+        <div class="proj-grid">
 
-async function fetchStatus() {
-  try {
-    const r = await fetch('https://api.lanyard.rest/v1/users/1396979947284729856');
-    const d = await r.json();
-    if (d.success) {
-      const s = d.data.discord_status || 'offline';
-      const { color, label } = STATUS_MAP[s] || STATUS_MAP.offline;
-      document.getElementById('dc-dot').style.background = color;
-      document.getElementById('dc-status-text').style.color = color;
-      document.getElementById('dc-status-text').textContent = label;
-    }
-  } catch {
-    document.getElementById('dc-status-text').textContent = 'Do Not Disturb';
-    document.getElementById('dc-dot').style.background = '#f23f43';
-    document.getElementById('dc-status-text').style.color = '#f23f43';
-  }
-}
-fetchStatus();
-</script>
+            <div class="proj-card featured">
+                <div class="proj-img-placeholder"
+                    style="background: linear-gradient(135deg, #11998e, #38ef7d); border-bottom: 1px solid #1e1e1e; height: 180px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                    <!-- Elegant background grid pattern -->
+                    <div
+                        style="position: absolute; inset: 0; opacity: 0.15; background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0), radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 20px 20px; background-position: 0 0, 10px 10px;">
+                    </div>
+                    <!-- Glowing soft circle -->
+                    <div
+                        style="position: absolute; width: 140px; height: 140px; background: rgba(255,255,255,0.25); filter: blur(30px); border-radius: 50%;">
+                    </div>
+                    <!-- Detailed Premium SVG for Tropica Systems (Tropical Leaf / Tech Network) -->
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        style="color: white; filter: drop-shadow(0 4px 10px rgba(17, 153, 142, 0.6)); z-index: 2;">
+                        <path d="M12 2c0 0 5 4.5 5 9.5a5 5 0 0 1-10 0C7 6.5 12 2 12 2z" fill="white" opacity="0.9"
+                            stroke="none" />
+                        <path d="M12 8v8M9 11h6M10 14h4" stroke="#11998e" stroke-width="1.2" stroke-linecap="round" />
+                        <path d="M5 16.5c2.5 1.5 5.5 1.5 8 0" stroke="white" stroke-width="1" stroke-linecap="round"
+                            opacity="0.6" />
+                        <path d="M11 19.5c1.5.5 3 .5 4.5 0" stroke="white" stroke-width="1" stroke-linecap="round"
+                            opacity="0.6" />
+                    </svg>
+                </div>
+                <div class="proj-body">
+                    <div class="proj-num" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>01 — FEATURED</span>
+                        <span
+                            style="background: rgba(17, 153, 142, 0.2); color: #38ef7d; padding: 2px 8px; border-radius: 20px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px;">800+
+                            SERVERS</span>
+                    </div>
+                    <div class="p-name">Tropica Systems</div>
+                    <p class="p-desc">Junior Engineer developing scalable services and backend components. Optimized
+                        database throughput and structured features servicing over 800+ servers globally.</p>
+                    <div class="p-tags">
+                        <span class="p-tag">Junior Engineer</span>
+                        <span class="p-tag">Database Speed</span>
+                        <span class="p-tag">MongoDB</span>
+                        <span class="p-tag">REST APIs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="proj-card">
+                <div class="proj-img-placeholder"
+                    style="background: linear-gradient(135deg, #ff4e50, #f9d423); border-bottom: 1px solid #ebebeb; height: 180px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                    <!-- Elegant background grid pattern -->
+                    <div
+                        style="position: absolute; inset: 0; opacity: 0.15; background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0), radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 20px 20px; background-position: 0 0, 10px 10px;">
+                    </div>
+                    <!-- Glowing soft circle -->
+                    <div
+                        style="position: absolute; width: 140px; height: 140px; background: rgba(255,255,255,0.2); filter: blur(30px); border-radius: 50%;">
+                    </div>
+                    <!-- Detailed Premium SVG Torch/Flame -->
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        style="color: white; filter: drop-shadow(0 4px 10px rgba(255, 78, 80, 0.6)); z-index: 2;">
+                        <path d="M12 2C10.5 5.5 8 7 8 10.5c0 2.2 1.8 4 4 4s4-1.8 4-4c0-3.5-2.5-5-4-8.5z" fill="white"
+                            opacity="0.9" stroke="none" />
+                        <path d="M12 6c-.8 2-2 2.5-2 4.5 0 1.1.9 2 2 2s2-.9 2-2c0-2-1.2-2.5-2-4.5z" fill="#ffe66d"
+                            opacity="0.95" stroke="none" />
+                        <path d="M18 13.5c.3-1 .2-2.2-.5-3-1 1-1.5 2-1.5 3.5 0 1.2.8 2.2 2 2.5.8-.3 1.1-1.1.8-2z"
+                            fill="#ff7675" opacity="0.8" stroke="none" />
+                        <path d="M6 13.5c-.3-1-.2-2.2.5-3 1 1 1.5 2 1.5 3.5 0 1.2-.8 2.2-2 2.5-.8-.3-1.1-1.1-.8-2z"
+                            fill="#ff7675" opacity="0.8" stroke="none" />
+                    </svg>
+                </div>
+                <div class="proj-body">
+                    <div class="proj-num" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>02 — SYSTEM</span>
+                        <span
+                            style="background: rgba(255, 78, 80, 0.1); color: #ff4e50; padding: 2px 8px; border-radius: 20px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px;">200+
+                            SERVERS</span>
+                    </div>
+                    <div class="p-name">Torch</div>
+                    <p class="p-desc">Lead Developer driving the architecture of Torch, a high-performance Discord bot.
+                        Designed custom administration hubs, role utilities, and automated database interactions.</p>
+                    <div class="p-tags">
+                        <span class="p-tag">Lead Developer</span>
+                        <span class="p-tag">Discord.js v14</span>
+                        <span class="p-tag">Node.js</span>
+                        <span class="p-tag">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="proj-card">
+                <div class="proj-img-placeholder"
+                    style="background: linear-gradient(135deg, #1e3c72, #2a5298); border-bottom: 1px solid #ebebeb; height: 180px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                    <!-- Elegant background grid pattern -->
+                    <div
+                        style="position: absolute; inset: 0; opacity: 0.15; background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0), radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 20px 20px; background-position: 0 0, 10px 10px;">
+                    </div>
+                    <!-- Glowing soft circle -->
+                    <div
+                        style="position: absolute; width: 140px; height: 140px; background: rgba(255,255,255,0.25); filter: blur(30px); border-radius: 50%;">
+                    </div>
+                    <!-- Detailed Premium SVG for Alaska State Roleplay (Snowy Mountains / Snowflake) -->
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        style="color: white; filter: drop-shadow(0 4px 10px rgba(30, 60, 114, 0.6)); z-index: 2;">
+                        <path d="M3 20L10 9L15 16L18 12L22 20H3Z" fill="white" opacity="0.9" stroke="none" />
+                        <path d="M10 9l3 4H7l3-4z" fill="#a5f3fc" opacity="0.95" stroke="none" />
+                        <path d="M18 12l2 3h-4l2-3z" fill="#e0f2fe" opacity="0.95" stroke="none" />
+                        <circle cx="12" cy="5" r="1.5" fill="white" stroke="none" />
+                        <circle cx="6" cy="7" r="1" fill="white" opacity="0.7" stroke="none" />
+                        <circle cx="18" cy="7" r="1" fill="white" opacity="0.7" stroke="none" />
+                    </svg>
+                </div>
+                <div class="proj-body">
+                    <div class="proj-num" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>03 — COMMUNITY</span>
+                        <span
+                            style="background: rgba(30, 60, 114, 0.1); color: #1e3c72; padding: 2px 8px; border-radius: 20px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px;">300+
+                            MEMBERS</span>
+                    </div>
+                    <div class="p-name">Alaska State Roleplay</div>
+                    <p class="p-desc">Former Bot Developer creating tailored systems for a 300+ member roleplay
+                        community. Developed verification flows, command structures, and automated moderation logs.</p>
+                    <div class="p-tags">
+                        <span class="p-tag">Former Bot Dev</span>
+                        <span class="p-tag">Custom Verification</span>
+                        <span class="p-tag">Roblox API</span>
+                        <span class="p-tag">Discord.js</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="about-wrap" id="about">
+        <div class="about-inner">
+            <div>
+                <div class="s-eyebrow">Background</div>
+                <div class="s-heading" style="color:#fff;">About <em style="color:#444;">me</em></div>
+                <p>I'm <strong>Eshan</strong> — a Discord bot developer who writes clean, production-ready
+                    <strong>JavaScript</strong> using the latest Discord.js APIs.
+                </p>
+                <p>I care about shipping things that are reliable and fast. No bloat — just solid bots that do exactly
+                    what you need, with code you can actually read.</p>
+                <p>Find me on Discord as <strong>noteshan</strong> — <a href="javascript:void(0)"
+                        onclick="openOAuthModal()" style="color:#5865F2;text-decoration:underline;font-weight:700;">get
+                        in contact or hire me</a> to start your project.</p>
+            </div>
+            <div class="dc-card" style="position: relative; overflow: visible;">
+                <div class="dc-row" style="position: relative; z-index: 5;">
+                    <!-- Relative wrapper for Avatar + Avatar Decoration -->
+                    <div class="dc-av-wrapper"
+                        style="position: relative; display: inline-block; width: 52px; height: 52px; flex-shrink: 0;">
+                        <img class="dc-av" id="dc-avatar"
+                            src="https://images-ext-1.discordapp.net/external/9qVqbtNjX7ZIKXOFOUGMPp-uj1wgNxLY84tbtvwfiH0/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/1396979947284729856/192a0185852a8e51ba373b0efdbf7c6b.webp?format=webp&width=200&height=200"
+                            alt="Eshan" style="width: 100%; height: 100%; display: block;" />
+                        <img class="dc-dec" id="dc-decoration" src="" alt="Decoration"
+                            style="display: none; position: absolute; top: -6px; left: -6px; width: 64px; height: 64px; pointer-events: none; z-index: 10;" />
+                    </div>
+                    <div>
+                        <div class="dc-name" id="dc-name-text">Eshan</div>
+                        <div class="dc-handle" id="dc-handle-text">@noteshan</div>
+                    </div>
+                </div>
+                <div class="dc-status" id="dc-status-row" style="position: relative; z-index: 5;">
+                    <span class="dc-dot" id="dc-dot" style="background:#747f8d;"></span>
+                    <span id="dc-status-text" style="color:#747f8d;">Fetching status...</span>
+                </div>
+                <div id="dc-activity-container"
+                    style="display: none; margin-top: 0.8rem; font-size: 0.72rem; color: #888; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); border: 1px solid #1a1a1a; padding: 0.5rem 0.8rem; border-radius: 12px; line-height: 1.4; position: relative; z-index: 5;">
+                    <span id="dc-activity-icon"
+                        style="font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;">🎮</span>
+                    <span id="dc-activity-text" style="word-break: break-word;">Loading status...</span>
+                </div>
+                <div class="dc-divider"></div>
+                <div
+                    style="font-size:.68rem;color:#444;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;margin-bottom:.7rem;">
+                    Stack</div>
+                <div class="dc-stack">
+                    <span class="dc-tag">JavaScript</span>
+                    <span class="dc-tag">Discord.js v14</span>
+                    <span class="dc-tag">Node.js</span>
+                    <span class="dc-tag">MongoDB</span>
+                    <span class="dc-tag">REST APIs</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-wrap" id="contact">
+        <div class="s-eyebrow" style="margin-bottom:1rem;">Let's build</div>
+        <h2>Got a<br><em>bot idea?</em></h2>
+        <p>Open for commissions and collabs. Connect with Discord to start today.</p>
+        <div class="cta-btns">
+            <button class="btn-dark" onclick="openOAuthModal()">Get in Contact / Hire Me</button>
+            <button class="btn-light">View GitHub</button>
+        </div>
+    </div>
+
+    <footer>
+        <span class="f-copy">© 2026 Eshan. All rights reserved.</span>
+        <span class="f-dc">discord: noteshan</span>
+    </footer>
+
+    <script>
+        function setImg(input, idx) {
+            if (!input.files || !input.files[0]) return;
+            const url = URL.createObjectURL(input.files[0]);
+            const placeholder = input.previousElementSibling;
+            placeholder.innerHTML = '';
+            placeholder.style.padding = '0';
+            placeholder.style.cursor = 'default';
+            const img = document.createElement('img');
+            img.src = url;
+            img.style.cssText = 'width:100%;height:180px;object-fit:cover;display:block;';
+            placeholder.appendChild(img);
+        }
+
+        const STATUS_MAP = {
+            online: { color: '#23a55a', label: 'Online' },
+            idle: { color: '#f0b232', label: 'Idle' },
+            dnd: { color: '#f23f43', label: 'Do Not Disturb' },
+            offline: { color: '#747f8d', label: 'Offline' }
+        };
+
+        async function fetchStatus() {
+            try {
+                const r = await fetch('https://api.lanyard.rest/v1/users/1396979947284729856');
+                const d = await r.json();
+                if (d.success) {
+                    const s = d.data.discord_status || 'offline';
+                    const { color, label } = STATUS_MAP[s] || STATUS_MAP.offline;
+                    document.getElementById('dc-dot').style.background = color;
+                    document.getElementById('dc-status-text').style.color = color;
+                    document.getElementById('dc-status-text').textContent = label;
+
+                    // Parse avatar decoration
+                    const decoration = d.data.discord_user.avatar_decoration_data;
+                    const decorationImg = document.getElementById('dc-decoration');
+                    if (decoration && decoration.asset) {
+                        decorationImg.src = `https://cdn.discordapp.com/avatar-decoration-presets/${decoration.asset}.png`;
+                        decorationImg.style.display = 'block';
+                    } else {
+                        decorationImg.style.display = 'none';
+                        decorationImg.src = '';
+                    }
+
+                    const nameText = document.getElementById('dc-name-text');
+                    const handleText = document.getElementById('dc-handle-text');
+
+                    // Parse global name colors / styles
+                    const nameStyles = d.data.discord_user.display_name_styles;
+                    if (nameStyles && nameStyles.colors && nameStyles.colors.length > 0) {
+                        const convertColor = (dec) => {
+                            let hex = dec.toString(16).padStart(6, '0');
+                            return '#' + hex;
+                        };
+
+                        if (nameStyles.colors.length === 1) {
+                            nameText.style.color = convertColor(nameStyles.colors[0]);
+                            nameText.style.background = 'none';
+                            nameText.style.webkitBackgroundClip = 'unset';
+                            nameText.style.webkitTextFillColor = 'unset';
+                        } else {
+                            const gradColors = nameStyles.colors.map(convertColor).join(', ');
+                            nameText.style.background = `linear-gradient(90deg, ${gradColors})`;
+                            nameText.style.webkitBackgroundClip = 'text';
+                            nameText.style.webkitTextFillColor = 'transparent';
+                        }
+                    } else {
+                        nameText.style.color = '#fff';
+                        nameText.style.background = 'none';
+                        nameText.style.webkitBackgroundClip = 'unset';
+                        nameText.style.webkitTextFillColor = 'unset';
+                    }
+
+                    // Parse activities
+                    const activities = d.data.activities || [];
+                    const activityContainer = document.getElementById('dc-activity-container');
+                    const activityText = document.getElementById('dc-activity-text');
+                    const activityIcon = document.getElementById('dc-activity-icon');
+
+                    if (s !== 'offline' && activities.length > 0) {
+                        let active = activities.find(a => a.type !== 4);
+
+                        if (active) {
+                            activityContainer.style.display = 'flex';
+                            let text = '';
+                            let emoji = '🎮';
+
+                            if (active.name === 'Spotify') {
+                                emoji = '🎵';
+                                const track = active.details || 'Unknown Track';
+                                const artist = active.state || 'Unknown Artist';
+                                text = `Listening to <strong style="color:#fff;">${track}</strong> by ${artist}`;
+                            } else {
+                                let verb = 'Playing';
+                                if (active.type === 1) verb = 'Streaming';
+                                if (active.type === 2) verb = 'Listening to';
+                                if (active.type === 3) verb = 'Watching';
+                                if (active.type === 5) verb = 'Competing in';
+
+                                text = `${verb} <strong style="color:#fff;">${active.name}</strong>`;
+                                if (active.details) {
+                                    text += ` — ${active.details}`;
+                                }
+                            }
+                            activityIcon.textContent = emoji;
+                            activityText.innerHTML = text;
+                        } else {
+                            const custom = activities.find(a => a.type === 4);
+                            if (custom && (custom.state || custom.emoji)) {
+                                activityContainer.style.display = 'flex';
+                                activityIcon.textContent = '💬';
+                                let emojiStr = '';
+                                if (custom.emoji && custom.emoji.name) {
+                                    emojiStr = custom.emoji.name + ' ';
+                                }
+                                activityText.innerHTML = `<span style="font-style:italic; color:#bbb;">"${emojiStr}${custom.state || ''}"</span>`;
+                            } else {
+                                activityContainer.style.display = 'none';
+                            }
+                        }
+                    } else {
+                        activityContainer.style.display = 'none';
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('dc-status-text').textContent = 'Do Not Disturb';
+                document.getElementById('dc-dot').style.background = '#f23f43';
+                document.getElementById('dc-status-text').style.color = '#f23f43';
+            }
+        }
+        fetchStatus();
+    </script>
+
+    <!-- ========================================== -->
+    <!--          DISCORD OAUTH2 SYSTEM             -->
+    <!-- ========================================== -->
+
+    <!-- Modal Overlay -->
+    <div id="discord-oauth-modal"
+        style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 99999; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+        <div id="discord-modal-card"
+            style="background: #111214; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; width: 90%; max-width: 480px; padding: 2rem; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; color: #dbdee1; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+            <!-- Close Button -->
+            <button onclick="closeOAuthModal()"
+                style="position: absolute; top: 1.2rem; right: 1.2rem; background: none; border: none; color: #80848e; cursor: pointer; font-size: 1.5rem; transition: color 0.2s; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%;">
+                &times;
+            </button>
+
+            <!-- Unauthenticated State -->
+            <div id="oauth-logged-out" style="text-align: center; display: block;">
+                <div
+                    style="width: 72px; height: 72px; background: #5865F2; border-radius: 20px; margin: 0.5rem auto 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(88, 101, 242, 0.4); animation: pulseGlow 2s infinite;">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="#fff">
+                        <path
+                            d="M17.8 7.3c-.6-.6-1.4-.9-2.1-1.1l-.2.4c.7.2 1.4.5 2 .9-.5-.3-1.1-.5-1.7-.7-.7-.2-1.4-.3-2.1-.3s-1.4.1-2.1.3c-.6.2-1.2.4-1.7.7.6-.4 1.3-.7 2-.9l-.2-.4c-.7.2-1.5.5-2.1 1.1C6.2 9.8 5.5 13.5 6 17.2c.8.8 2 1.3 3.1 1.3l.6-.7c-.7-.2-1.4-.6-1.9-1.1.2.1.4.3.7.4a7 7 0 005 0c.3-.1.5-.3.7-.4-.5.5-1.2.9-1.9 1.1l.6.7c1.1 0 2.3-.5 3.1-1.3.5-3.7-.2-7.4-1.5-9.9zM10.2 14c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm3.6 0c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z" />
+                    </svg>
+                </div>
+                <h2
+                    style="color: #fff; font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.5px;">
+                    Get in Contact</h2>
+                <p style="color: #949ba4; font-size: 0.9rem; line-height: 1.5; margin-bottom: 2rem; padding: 0 1rem;">
+                    Connect your Discord account to instantly unlock noteshan's developers hub, join the guild, and
+                    submit custom project requests.
+                </p>
+                <button onclick="redirectToDiscord()"
+                    style="width: 100%; padding: 14px; background: #5865F2; color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17.8 7.3c-.6-.6-1.4-.9-2.1-1.1l-.2.4c.7.2 1.4.5 2 .9-.5-.3-1.1-.5-1.7-.7-.7-.2-1.4-.3-2.1-.3s-1.4.1-2.1.3c-.6.2-1.2.4-1.7.7.6-.4 1.3-.7 2-.9l-.2-.4c-.7.2-1.5.5-2.1 1.1C6.2 9.8 5.5 13.5 6 17.2c.8.8 2 1.3 3.1 1.3l.6-.7c-.7-.2-1.4-.6-1.9-1.1.2.1.4.3.7.4a7 7 0 005 0c.3-.1.5-.3.7-.4-.5.5-1.2.9-1.9 1.1l.6.7c1.1 0 2.3-.5 3.1-1.3.5-3.7-.2-7.4-1.5-9.9zM10.2 14c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm3.6 0c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z" />
+                    </svg>
+                    Sign in with Discord
+                </button>
+            </div>
+
+            <!-- Authenticated State -->
+            <div id="oauth-logged-in" style="display: none;">
+                <!-- User Info Profile Banner -->
+                <div
+                    style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 14px; padding: 1rem; display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; position: relative; overflow: hidden;">
+                    <div
+                        style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(88,101,242,0.05), transparent); pointer-events: none;">
+                    </div>
+                    <div style="position: relative;">
+                        <img id="usr-av" src="" alt="Avatar"
+                            style="width: 48px; height: 48px; border-radius: 50%; border: 2px solid #5865F2; display: block;" />
+                        <span id="usr-status-dot"
+                            style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #111214; background: #23a55a;"></span>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span id="usr-name" style="font-weight: 700; color: #fff; font-size: 1rem;">User</span>
+                            <span
+                                style="font-size: 0.65rem; background: rgba(88, 101, 242, 0.2); color: #5865F2; border: 1px solid rgba(88, 101, 242, 0.4); padding: 1px 6px; border-radius: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Connected</span>
+                        </div>
+                        <span id="usr-tag" style="font-size: 0.8rem; color: #949ba4;">@username</span>
+                    </div>
+                    <button onclick="handleSignOut()"
+                        style="margin-left: auto; background: none; border: none; color: #f23f43; font-size: 0.8rem; font-weight: 600; cursor: pointer; padding: 6px 10px; border-radius: 6px; transition: background 0.2s;">
+                        Sign Out
+                    </button>
+                </div>
+
+                <!-- Developer Hub Join Card -->
+                <div id="join-card-container"
+                    style="background: rgba(88, 101, 242, 0.08); border: 1px solid rgba(88, 101, 242, 0.2); border-radius: 14px; padding: 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                    <div style="flex: 1;">
+                        <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 3px; font-weight: 700;">Join
+                            Developer Hub</h4>
+                        <p style="color: #b5bac1; font-size: 0.78rem; line-height: 1.3;">Get direct priority developer
+                            support and chat with Eshan.</p>
+                    </div>
+                    <button id="btn-guild-action" onclick="joinDeveloperHub()"
+                        style="padding: 8px 16px; background: #5865F2; border: none; border-radius: 8px; color: #fff; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; white-space: nowrap;">
+                        Join Server
+                    </button>
+                </div>
+
+                <!-- Commission Info / Onboarding Form -->
+                <div>
+                    <h3
+                        style="color: #fff; font-size: 1.05rem; margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #5865F2;">
+                            <path d="M12 20h9" />
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                        </svg>
+                        Submit a Project Request
+                    </h3>
+                    <form id="discord-onboarding-form" onsubmit="handleFormSubmit(event)"
+                        style="display: flex; flex-direction: column; gap: 12px;">
+                        <div>
+                            <label
+                                style="display: block; font-size: 0.72rem; color: #b5bac1; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; letter-spacing: 0.5px;">Project
+                                Type & Description</label>
+                            <textarea required placeholder="What kind of bot do you need? What are the key features?"
+                                style="width: 100%; height: 75px; background: #1e1f22; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; color: #fff; padding: 10px; font-size: 0.85rem; resize: none; outline: none; transition: border-color 0.2s;"
+                                onfocus="this.style.borderColor='#5865F2'"
+                                onblur="this.style.borderColor='rgba(255,255,255,0.06)'"></textarea>
+                        </div>
+                        <div>
+                            <label
+                                style="display: block; font-size: 0.72rem; color: #b5bac1; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; letter-spacing: 0.5px;">Budget
+                                & Timeline</label>
+                            <input type="text" required placeholder="E.g. $150 budget, needed in 1 week"
+                                style="width: 100%; background: #1e1f22; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; color: #fff; padding: 10px; font-size: 0.85rem; outline: none; transition: border-color 0.2s;"
+                                onfocus="this.style.borderColor='#5865F2'"
+                                onblur="this.style.borderColor='rgba(255,255,255,0.06)'" />
+                        </div>
+                        <button type="submit"
+                            style="width: 100%; padding: 12px; background: #23b55a; color: #fff; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 6px;">
+                            Submit Project Request
+                        </button>
+                    </form>
+                    <div id="form-success-message"
+                        style="display: none; background: rgba(35, 181, 90, 0.1); border: 1px solid rgba(35, 181, 90, 0.3); border-radius: 8px; padding: 10px; text-align: center; color: #23b55a; font-size: 0.85rem; margin-top: 10px;">
+                        Request sent! Eshan will get back to you directly on Discord.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discord OAuth2 Script -->
+    <script>
+        const DISCORD_CLIENT_ID = '1465493070186414131'; // REPLACE WITH YOUR DISCORD APP CLIENT ID
+        const SERVER_GUILD_ID = '1505412638371483828';
+        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1505413471586484355/H1gjoyl_eUW3yo3Zs3jcySmt68H4BEYnz_DI9iTbenTuhWHdQxN8N4OKRx61kfsBy9p9'; // REPLACE WITH YOUR DISCORD WEBHOOK URL TO RECEIVE SUBMITTED REQUESTS
+
+        function getRedirectUri() {
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                return window.location.origin;
+            }
+            return 'https://noteshan.xyz';
+        }
+
+        function openOAuthModal() {
+            const modal = document.getElementById('discord-oauth-modal');
+            const card = document.getElementById('discord-modal-card');
+            modal.style.display = 'flex';
+            modal.offsetHeight; // Force layout
+            modal.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+
+            const token = localStorage.getItem('dc_access_token');
+            if (token) {
+                loadDiscordUser(token);
+            } else {
+                showLoggedOutState();
+            }
+        }
+
+        function closeOAuthModal() {
+            const modal = document.getElementById('discord-oauth-modal');
+            const card = document.getElementById('discord-modal-card');
+            modal.style.opacity = '0';
+            card.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('discord-oauth-modal');
+            if (e.target === modal) {
+                closeOAuthModal();
+            }
+        });
+
+        function redirectToDiscord() {
+            const clientId = DISCORD_CLIENT_ID;
+            const redirectUri = encodeURIComponent(getRedirectUri());
+            const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=identify%20guilds`;
+            window.location.href = oauthUrl;
+        }
+
+        function showLoggedOutState() {
+            document.getElementById('oauth-logged-out').style.display = 'block';
+            document.getElementById('oauth-logged-in').style.display = 'none';
+            const navBtn = document.getElementById('nav-login-btn');
+            if (navBtn) {
+                navBtn.textContent = 'noteshan';
+                navBtn.style.background = 'transparent';
+                navBtn.style.color = '#747f8d';
+                navBtn.style.border = '1px solid #e0e0e0';
+            }
+        }
+
+        function showLoggedInState(userData) {
+            document.getElementById('oauth-logged-out').style.display = 'none';
+            document.getElementById('oauth-logged-in').style.display = 'block';
+
+            document.getElementById('usr-name').textContent = userData.global_name || userData.username;
+            document.getElementById('usr-tag').textContent = `@${userData.username}`;
+
+            const avatarUrl = userData.avatar
+                ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png?size=128`
+                : `https://cdn.discordapp.com/embed/avatars/${parseInt(userData.id) % 5}.png`;
+            document.getElementById('usr-av').src = avatarUrl;
+
+            const navBtn = document.getElementById('nav-login-btn');
+            if (navBtn) {
+                // Keep Eshan's name on the main page navigation bar instead of printing the user's name
+                navBtn.innerHTML = `<img src="${avatarUrl}" style="width:18px;height:18px;border-radius:50%;vertical-align:middle;margin-right:6px;" /> Connected`;
+                navBtn.style.background = 'rgba(88, 101, 242, 0.1)';
+                navBtn.style.color = '#5865F2';
+                navBtn.style.border = '1px solid rgba(88, 101, 242, 0.3)';
+            }
+        }
+
+        function updateServerJoinUI(inServer) {
+            const btn = document.getElementById('btn-guild-action');
+            if (inServer) {
+                btn.textContent = 'Member';
+                btn.style.background = 'rgba(35, 181, 90, 0.15)';
+                btn.style.color = '#23b55a';
+                btn.style.border = '1px solid rgba(35, 181, 90, 0.3)';
+                btn.style.cursor = 'default';
+                btn.onclick = null;
+            } else {
+                btn.textContent = 'Join Server';
+                btn.style.background = '#5865F2';
+                btn.style.color = '#fff';
+                btn.style.border = 'none';
+                btn.style.cursor = 'pointer';
+                btn.onclick = joinDeveloperHub;
+            }
+        }
+
+        async function joinDeveloperHub() {
+            const btn = document.getElementById('btn-guild-action');
+            const token = localStorage.getItem('dc_access_token');
+            if (!token) return;
+
+            const originalText = btn.textContent;
+            btn.textContent = 'Joining...';
+            btn.style.opacity = '0.7';
+
+            try {
+                // Fetch current user details to get user ID
+                const userRes = await fetch('https://discord.com/api/users/@me', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const userData = await userRes.json();
+
+                // 1. First, request our secure serverless API endpoint to automatically join the guild
+                const joinRes = await fetch('/api/join', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        access_token: token,
+                        user_id: userData.id
+                    })
+                });
+
+                if (joinRes.ok) {
+                    updateServerJoinUI(true);
+                } else {
+                    // 2. If serverless fails or isn't deployed, fallback to standard Discord Invite link!
+                    window.open('https://discord.gg/S2ztWBu8', '_blank');
+                    btn.textContent = originalText;
+                    btn.style.opacity = '1';
+                }
+            } catch (err) {
+                console.error('Auto-join failed, falling back to invite link:', err);
+                window.open('https://discord.gg/S2ztWBu8', '_blank');
+                btn.textContent = originalText;
+                btn.style.opacity = '1';
+            }
+        }
+
+        function handleSignOut() {
+            localStorage.removeItem('dc_access_token');
+            showLoggedOutState();
+        }
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const textareas = e.target.getElementsByTagName('textarea');
+            const inputs = e.target.getElementsByTagName('input');
+            const desc = textareas[0].value;
+            const budgetTimeline = inputs[0].value;
+
+            const token = localStorage.getItem('dc_access_token');
+            if (!token) return;
+
+            try {
+                const userRes = await fetch('https://discord.com/api/users/@me', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const userData = await userRes.json();
+
+                if (WEBHOOK_URL) {
+                    const embed = {
+                        title: '💼 New Bot Commission Request',
+                        color: 5814783,
+                        fields: [
+                            { name: 'User', value: `<@${userData.id}> (${userData.username})`, inline: true },
+                            { name: 'Discord ID', value: userData.id, inline: true },
+                            { name: 'Budget & Timeline', value: budgetTimeline },
+                            { name: 'Project Details', value: desc }
+                        ],
+                        timestamp: new Date().toISOString()
+                    };
+
+                    await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ embeds: [embed] })
+                    });
+                }
+
+                document.getElementById('discord-onboarding-form').style.display = 'none';
+                document.getElementById('form-success-message').style.display = 'block';
+            } catch (err) {
+                console.error(err);
+                alert('Submission failed. Please try again.');
+            }
+        }
+
+        async function loadDiscordUser(token) {
+            try {
+                const userRes = await fetch('https://discord.com/api/users/@me', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                if (userRes.status === 401) {
+                    localStorage.removeItem('dc_access_token');
+                    showLoggedOutState();
+                    return;
+                }
+                const userData = await userRes.json();
+                showLoggedInState(userData);
+
+                const guildsRes = await fetch('https://discord.com/api/users/@me/guilds', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                if (guildsRes.ok) {
+                    const guilds = await guildsRes.json();
+                    const inServer = guilds.some(g => g.id === SERVER_GUILD_ID);
+                    updateServerJoinUI(inServer);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const fragment = new URLSearchParams(window.location.hash.slice(1));
+            const accessToken = fragment.get('access_token');
+            if (accessToken) {
+                localStorage.setItem('dc_access_token', accessToken);
+                window.history.replaceState({}, document.title, window.location.pathname);
+                openOAuthModal();
+            } else {
+                const token = localStorage.getItem('dc_access_token');
+                if (token) {
+                    loadDiscordUser(token);
+                }
+            }
+        });
+    </script>
 </body>
+
 </html>
